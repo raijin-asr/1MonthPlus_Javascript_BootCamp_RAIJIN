@@ -1,0 +1,16 @@
+JavaScript is:
+    -High Level Language(understandable, readable)
+    -Interpreted(translate code line by line to machine language)
+    -JS Engine resides in web browser and parse js code(v8 engine in chrome, SpiderMonkey in firefox)
+    -previously, JS designed only for web, now, nodejs at runtime runs on terminal outside of browser
+    -dynamically typed(check and take data type of variable and function at runtime)
+        -function sum(a,b) , no datatype like int needed like in C, C++
+    -C,C++ are statically typed: need of declare datatype
+    -dart is hybrid or gradual
+    -OOP language
+    -prototype based language
+    -everything is object(array has to be array, function has to be function but it js all are object)
+    -object is key value pair, in python it is dictionary
+    -but class object is instantiation of class
+    -functional, event-driven, procedural and general purpose language
+    -multi-paradigm language.
