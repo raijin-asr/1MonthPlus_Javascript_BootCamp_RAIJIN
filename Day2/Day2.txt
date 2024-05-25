@@ -1,0 +1,16 @@
+-ECMA: European Computer Manufacture Association
+-ECMA Script: its not programming language but just a guideline standard for web scripting language
+-ISO, IEEE and ANSI are other organization like ECMA
+-JS Version follows ECMA Scripts as ES1, ES2, to ES13 and ES.NEXT is latest update for JS
+
+--HOW browser renders web page?
+    -parse HTML
+    -fetch external resource
+    -parse CSS and build CSSOM(CSS Object Model)
+    -execute JS
+    -merge DOM and CSSOM to construct render tree
+    -calculate layout(every position and size) and paint the pixels on screen
+-render engine used for render tree: Blink for chrome, Gecko for firefox
+
+-github.com/tc39 is repo of ECMA updates on meetings, proposal
+-github.dev and project idx.dev are browser code editor
