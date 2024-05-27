@@ -1,6 +1,6 @@
 // also known as string literals
 // allow to embed expressions in the string
-// use backticks (`) to perform template interpolation
+// use back ticks (`) to perform template interpolation
 // use ${} to embed expressions or ${expression} to embed expressions
 // we can achieve multiline strings, direct variable usage, and hookup an expression making easy to read and understand code
 
