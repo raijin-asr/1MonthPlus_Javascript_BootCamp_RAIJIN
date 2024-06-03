@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+<!-- //Event Handling, in GUI, is a mechanism to handle events, such as user input events (mouse clicks, key presses) and happening events.
+//to create responsive and interactive application
+//Event, Event Source, Event Listener, Event Handler, Event Queue, Event Loop, Event Propagation 
+
+//1. Mouse Events
+//2. Keyboard Events
+//3. Form Events
+//4. Document/Window Events
+//5. Focus Events
+
+//1. Mouse Events-----------------
+//click, dblclick, mouseenter, mouseleave, mousedown, mouseup, mousemove, mouseover, mouseout -->
+
+<!-- //click event --><br>
+<button onclick="alert('Hello World')">Click Me</button>
+<button id="myBtn">Click Me</button> <!--direct onclick from script tag -->
+<script>
+  document.getElementById("myBtn").onclick = function() {
+    alert("Hello World!");
+    console.log("Hello World!");
+  };
+</script>
+
+
+<!-- //dblclick event -->
+<button ondblclick="alert('Hello World')">Double Click Me</button>
+
+<!-- //mouseenter event -->
+<button onmouseenter="alert('Mouse Enter')">Mouse Enter</button>
+
+<!-- //mouseleave event -->
+<button onmouseleave="alert('Mouse Leave')">Mouse Leave</button>
+
+<!-- //mousedown event -->
+<button onmousedown="alert('Mouse Down')">Mouse Down</button>
+
+<!-- //mouseup event -->
+<button onmouseup="alert('Hello Mouse Up')">Mouse Up</button>
+
+<!-- //mousemove event -->
+<button onmousemove="alert('Hello Mouse Move')">Mouse Move</button>
+
+<!-- //2. Keyboard Events-----------------
+//keydown, keypress, keyup
+
+//Example
+//keydown event -->
+<br><hr>
+<p>Press a key inside the input field.</p>
+
+<input type="text" onkeydown="myFunction1()">
+<p id="demo"></p>
+
+<script>
+function myFunction1() {
+  document.getElementById("demo").innerHTML = "Down Key Event.";
+} 
+function myFunction2() {
+  document.getElementById("demo").innerHTML = "Press Key Event.";
+} 
+function myFunction3() {
+  document.getElementById("demo").innerHTML = "Up Key Event.";
+} 
+</script>
+
+<!-- //keypress event -->
+<input type="text" onkeypress="myFunction2()">
+
+<!-- //keyup event -->
+<input type="text" onkeyup="myFunction3()"> 
+
+
+<!-- //3. Form Events-------------- 
+//submit, change, focus, blur, select
+
+//Example
+//submit event -->
+<br><br><hr>
+<form onsubmit="myFunction4()">
+  Enter name: <input type="text">
+  <input type="submit">
+</form>
+
+<script>
+function myFunction4() {
+  alert("The form was submitted"); 
+}
+</script>
+
+<!-- //change event -->
+<br>
+<select id="mySelect" onchange="myFunction5()">
+  <option value="Audi">Audi</option>
+  <option value="BMW">BMW</option>
+  <option value="Mercedes">Mercedes</option>
+  <option value="Volvo">Volvo</option>
+</select>
+
+<script>
+function myFunction5() {
+  //show the selected value
+  var x = document.getElementById("mySelect").value;
+  alert("You selected a car"+ x);
+}
+</script>
+
+
+<!-- //4. Document/Window Events----------------- 
+//load, resize, scroll, unload, beforeunload, error
+
+//Example
+//load event -->
+<script>
+// window.onload = function() {
+//   alert("Window is loaded");
+// };
+
+// //resize event
+// window.onresize = function() {
+//   alert("Window is resized");
+// };
+
+// //scroll event
+// window.onscroll = function() {
+//   alert("Window is scrolled");
+// };
+
+// //unload event
+// window.onunload = function() {
+//   alert("Window is unloaded");
+// };
+
+// //beforeunload event : it works as a confirmation message before leaving the page
+// window.onbeforeunload = function() {
+//   return "Do you really want to leave?";
+// };
+
+//error event
+// window.onerror = function() {
+//   alert("An error occurred");
+// };
+</script>
+
+
+<!-- //5. Focus Events 
+//focus, blur, focusin, focusout 
+
+//Example
+//focus event --><br><br><hr>
+<input type="text" onfocus="myFunction6()" onblur="myFunction7()">
+<p id="focus-data">Focus and Blur: Click inside the text field, and then click outside the field to see the difference between the two events.</p>
+
+<script>
+function myFunction6() {
+  document.getElementById("focus-data").style.backgroundColor = "yellow";
+}
+
+function myFunction7() {
+  document.getElementById("focus-data").style.backgroundColor = "red";
+}
+</script>
+
+<!-- //Focusin event -->
+<input type="text" onfocusin="myFunction8()" onfocusout="myFunction9()">
+<p id="focus-data2">Focus In and OUt: Click inside the text field, and then click outside the field to see the difference between the two events.</p>
+
+<script>
+function myFunction8() {
+  document.getElementById("focus-data2").style.backgroundColor = "yellow";
+}
+
+function myFunction9() {
+  document.getElementById("focus-data2").style.backgroundColor = "red";
+}
+
+</script>
+
+<!-- //Adding Events
+//1. HTML event attributes(starts with "on")
+//It is not a good way to add events. It can overwrite existing event attributes.
+
+//Example -->
+<button onclick="displayDate()">The time1 is?</button>
+<p id="time-data1">Show Time1: </p>
+<script>
+function displayDate() {
+  document.getElementById("time-data").innerHTML = "Date1()";
+}
+</script>
+<!-- 
+//2. Form Attribute-property
+//It is a better way to add events. It is supported by all modern browsers.
+//Syntax: -->
+<button id="myBtn3" onclick="displayDate2()">The time2 is?</button>
+<p id="time-data2">Show Time2: </p>
+<script>
+document.getElementById("myBtn3").onclick = function() {displayDate()};
+function displayDate2() {
+  document.getElementById("time-data2").innerHTML = "Date2()";
+}
+</script>
+
+<!-- //3. addEventListener() Method
+//It is the most common used method to handle events. It is supported by all modern browsers.
+//It attaches an event handler to the specified element without overwriting existing event handlers.
+//Syntax:  -->
+<script>
+
+//Example --> //also callback function, High Order function, event handling function
+document.getElementById("myBtn").addEventListener("click", displayDate);
+function displayDate() {
+  document.getElementById("demo").innerHTML = Date();
+}
+
+//removeEventListener() Method
+//It removes an event handler that has been attached with the addEventListener() method.
+//Syntax: -->
+document.getElementById("myBtn").removeEventListener("click", displayDate);
+
+</script>
+
+<!--//DOM Level Events
+//It is a standard for how events should work in the DOM. It is a W3C standard.
+
+// DOM Level 0 Events (initial release)
+//It is the traditional way to handle events. It is not recommended to use.
+//some attributes are: onclick, onmouseover, onmouseout, onkeydown, onkeyup, onfocus, onblur, etc.
+
+
+//Dom 2(2000)
+//It is a standard for how events should work in the DOM. It is a W3C standard.
+//It is the most common used method to handle events. It is supported by all modern browsers.
+//It attaches an event handler to the specified element without overwriting existing event handlers.
+//It removes an event handler that has been attached with the addEventListener() method.
+//more refined version.
+//example: addEventListener(), removeEventListener()
+
+//DOM 3(2004)
+//do not have any new event, but it has new features like event capturing, event bubbling, etc.
+//added events are: mouse event, keyboard, window events and mutation events
+
+
+//DOm 4(2015): Current Version
+//minor update on DOM 3
+//support of modern devices with events like touch, swipe, pinch, etc.
+-->
+
+
+<!-- //Playout Examples of Event:
+//1. Changing background COlor-->
+<button id="myBtn2" onclick="funBgChange">Click to change background</button>
+
+<script>
+  //document.body.style.backgroundColor = "red"; //direct simple
+  
+  //random list of color
+  var colors = ["red", "green", "blue","black", "white"];
+
+  function funBgChange() {
+    let index=Math.floor(Math.random() * color.length); //give random color index
+    document.body.style.backgroundColor  = colors[index];
+  }
+</script>
+
+<!--2. Hide and Show image -->
+<br><img id="myImage" src="./messi.jpg" width="200" height="180"> 
+<button id="btnChangeImg">Click to Hide/Show Image</button>
+
+<script>
+  let btnImg = document.getElementById("btnChangeImg");
+  let img = document.getElementById("myImage");
+
+  btnImg.addEventListener("click", function(){
+
+    // console.log("Button Clicked");
+    //show image if hidden, hide image if shown
+    // img.style.visibility= img.style.visibility == "hidden" ? "visible" : "hidden";
+
+    //using if
+    if(img.style.visibility == "hidden") {
+      img.style.visibility = "visible";
+      btnImg.innerText="Hide Image";
+    } else {
+      img.style.visibility = "hidden";
+      btnImg.innerText="Show Image";
+    }
+  });
+ 
+</script>
+
+</body>
+</html>
