@@ -156,3 +156,19 @@ let output= data.sort(); //["A", 1, 2, 3, 4, "a"]
 let result = number4.sort(function (a, b) {
     return b - a; //if -ve, a comes first, if +ve, b comes first, 0: both value same
 });
+
+//chaining of high order function
+//map().filter().reduce()
+let number5 = [1, 2, 3, 4, 5];
+let result = number5.map(function (num) {
+    return num * 2;
+}).filter(function (num) {
+    return num > 5;
+}).reduce(function (acc, num) {
+    return acc + num;
+}, 0); 
+//output: 2, 4, 6, 8, 10 //map 
+//takes above output: 6, 8, 10 //filter
+//again takes above output: 24 //reduce //final output
+
+console.log(result); //24

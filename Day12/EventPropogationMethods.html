@@ -1,0 +1,161 @@
+<!-- //Event Flow or Propagation Methods
+// Event flow is the order in which events are received on the web page. 
+//it determines how events propagate or travel, routed and processed through the DOM tree
+//handles events like User Interactions, GUI
+
+//for handling/manipulating events, preventing/allowing default browser's behavior, event debugging, event order manipulation
+//not useful for all events, but useful for some events like click, mouseover, mouseout, etc.
+//useful in games, animations, drag and drop, etc.
+//Two types: Event bubbling and Event capturing
+
+// Event Bubbling: Be default, When an event is fired on an element, it first runs the event handlers on it, then on its parent, then all the way up on other ancestors.
+// Event Capturing: When an event is fired on an element, it first runs the event handlers on the ancestors, then on the element itself.
+
+//There are three phases of event flow:
+    // 1. Capturing phase: The event is first captured by the outermost element and propagated to the inner elements.
+    // 2. Target phase: The event has reached the target element.
+    // 3. Bubbling phase: The event is propagated back to the outermost element.
+
+// Event Propagation Methods
+    // 1. stopPropagation(): This method stops the event from bubbling up the event chain.
+    // 2. stopImmediatePropagation(): This method stops the event from bubbling up the event chain and prevents other event handlers on the same element from running.
+    // 3. preventDefault(): This method stops the default action of an element from happening. -->
+
+<!-- // Example
+// HTML file -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Propagation</title>
+    <style>
+        #level1 {
+            background-color: red;
+            padding: 20px;
+        }
+
+        #level2 {
+            background-color: green;
+            padding: 20px;
+        }
+
+        #level3 {
+            background-color: blue;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="level1">
+        <div id="level2">
+            <div id="level3"><p>Ameer</p></div>
+        </div>
+    </div>
+
+<script>
+    //1. Event Bubbling: When an event is fired on an element, it first runs the event handlers on it, then on its parent, then all the way up on other ancestors.
+    const level1 = document.getElementById('level1');
+    const level2 = document.getElementById('level2');
+    const level3 = document.getElementById('level3');
+
+    level1.addEventListener('click', () => {
+        console.log('Level 1 clicked');
+        event.stopPropagation();
+    });
+
+    level2.addEventListener('click', (e) => {
+        console.log('Level 2 clicked');
+        //disadvantage: it will trigger all the click events of all the ancestors, there could be some performance issues
+        //data of parent elements, having fetch data may load, even we dont want that
+        //so we can stop the event bubbling using stopPropagation() method
+
+        e.stopPropagation();
+    },
+    { //2. Event capturing: When an event is fired on an element, it first runs the event handlers on the ancestors, then on the element itself.
+        capture: true
+        //first flow from level1 to level3, then level3 to level1
+    }
+);
+
+    level3.addEventListener('click', () => {
+        console.log('Level 3 clicked');
+    });
+
+    document.addEventListener('click', () => {
+        console.log('Document clicked');
+    });
+    //when we click on level3, it will also trigger the click event of level2 and level1 and till to document
+    
+    //if both phase used, first caputre phase will be executed, then bubbling phase will be executed
+
+    //setTimeout function to remove the event listener after 2 seconds
+    setTimeout(() => {
+        level1.removeEventListener('click', () => {
+            console.log('Level 1 clicked');
+        });
+    }, 2000);
+    //used in Registration form, after submitting the form, we can remove the event listener
+    //used in games, after game over, we can remove the event listener
+    //registration OTP, after OTP verification, we can remove the event listener
+    //lucky draw, coupon code, etc.
+
+    //same reference function should be passed to remove the event listener
+    setTimeout(() => {
+        level2.removeEventListener('click', RemoveLevel2);
+    }, 2000);
+
+    level1.addEventListener('click', RemoveLevel2);
+
+    function RemoveLevel2() {
+        console.log('Level 2 clicked');
+    }
+
+
+    level2.addEventListener('click', () => {
+        console.log('Level 2 clicked');
+    });
+
+    level3.addEventListener('dblclick', () => {
+        console.log('Level3 Double clicked');
+    });
+    //does not show level 2 as level 3 is double clicked, so it will not trigger the click event of level2
+
+    level3.addEventListener('click', () => {
+        console.log('Level3 Double clicked');
+    },
+    {
+        once: true //only once it will trigger the event and next time it will not trigger the event
+    });
+
+    //difference between target ande CurrentTarget
+    //target: the element on which the event was triggered
+    //currentTarget: the element on which the event listener is attached
+
+    level3.addEventListener('click', (e) => {
+        console.log('Target:', e.target); //gives the element on which the event was triggered
+        console.log('Current Target:', e.currentTarget); //gives the element on which the event listener is attached
+        //if we click on level3, it will give the same element for both target and currentTarget
+        // gives Target: level3, Current Target: level3
+        //gives Target: level3, Current Target: level2
+        //gives Target: level3, Current Target: level1
+    });
+
+    //event delegation
+    //it is a technique to add event listener to a parent element instead of adding it to the child elements
+    //it is useful when we have a large number of child elements and we want to add the same event listener to all of them
+    //whether we have clicked in level 2 or 3, use event delegation to which element is clicked
+    //use tagName or className to check which element is clicked
+
+    level3.addEventListener('click', (e) => {
+        console.log(e.target.tagName);
+        if (e.target.tagName === 'DIV') {
+            console.log('Div clicked');
+        } else if (e.target.tagName === 'P') {
+            console.log('P clicked');
+        }
+
+    });
+</script>
+</body>
+</html>

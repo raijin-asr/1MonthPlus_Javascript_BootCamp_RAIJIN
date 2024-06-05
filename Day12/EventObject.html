@@ -1,0 +1,116 @@
+<!-- //Event Object
+//for handling events in javascript
+//examples: mouse events, keyboard events, form events, document/window events -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Object Practice</title>
+</head>
+<body>
+    <button id="btn" class="btnClass">Click Me</button>
+
+<script>
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', function(e){
+        console.log(e); //e is event object
+        console.log(e.target); //target is the element that triggered the event
+        console.log(e.target.id); //id of the element that triggered the event
+        console.log(e.target.className); //class of the element that triggered the event
+        console.log(e.target.classList); //list of classes of the element that triggered the event
+        console.log(e.type); //type of event 
+        console.log(e.clientX); //x coordinate of the mouse pointer when the event was triggered
+        console.log(e.clientY); //y coordinate of the mouse pointer when the event was triggered
+        console.log(e.offsetX); //x coordinate of the mouse pointer when the event was triggered relative to the element
+        console.log(e.offsetY); //y coordinate of the mouse pointer when the event was triggered relative to the element
+        console.log(e.altKey); //true if the alt key was pressed when the event was triggered
+        console.log(e.ctrlKey); //true if the ctrl key was pressed when the event was triggered
+        console.log(e.shiftKey); //true if the shift key was pressed when the event was triggered
+    });
+
+    //e.preventDefault() - prevents the default action of the event
+    //e.stopPropagation() - stops the event from bubbling up the event chain
+    //e.stopImmediatePropagation() - stops the event from bubbling up the event chain and prevents other event handlers from being executed
+    //e.target - returns the element that triggered the event
+    //e.currentTarget - returns the element that the event listener is attached to
+
+    //Event Object Properties
+    //bubbles - returns true if the event bubbles up the event chain
+    //cancelable - returns true if the event can be cancelled
+    //currentTarget - returns the element that the event listener is attached to
+    //defaultPrevented - returns true if the preventDefault() method was called for the event
+    //eventPhase - returns the phase of the event flow (1 = capturing phase, 2 = at target, 3 = bubbling phase)
+    //isTrusted - returns true if the event is trusted
+    //target - returns the element that triggered the event
+    //timeStamp - returns the time when the event was created
+    //type - returns the type of the event
+    //view - returns a reference to the Window object where the event occurred
+    //which - returns the key code of the key that triggered the event
+    //x - returns the horizontal coordinate of the mouse pointer when the event was triggered
+    //y - returns the vertical coordinate of the mouse pointer when the event was triggered
+    
+    //Event Object Methods
+    //preventDefault() - cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur
+    //stopPropagation() - stops the event from bubbling up the event chain
+    //stopImmediatePropagation() - stops the event from bubbling up the event chain and prevents other event handlers from being executed
+    //initEvent() - initializes the value of an event created
+    //initCustomEvent() - initializes the value of a custom event created
+    //preventDefault() - cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur
+    //stopPropagation() - stops the event from bubbling up the event chain
+
+    //Event Object Types
+    //UIEvent - all events that occur in the browser are of the UIEvent type
+    //MouseEvent - all events that occur as a result of mouse interaction are of the MouseEvent type
+    //KeyboardEvent - all events that occur as a result of keyboard interaction are of the KeyboardEvent type
+    //FocusEvent - all events that occur as a result of focus are of the FocusEvent type
+    //WheelEvent - all events that occur as a result of mouse wheel interaction are of the WheelEvent type
+    //InputEvent - all events that occur as a result of user input are of the InputEvent type
+    //CompositionEvent - all events that occur as a result of composition are of the CompositionEvent type
+
+    //AnimationEvent - all events that occur as a result of CSS animations are of the AnimationEvent type
+    //DragEvent - all events that occur as a result of drag and drop are of the DragEvent type
+    //ClipboardEvent - all events that occur as a result of clipboard interaction are of the ClipboardEvent type
+    //CloseEvent - all events that occur as a result of a connection closing are of the CloseEvent type
+    //ErrorEvent - all events that occur as a result of an error are of the ErrorEvent type
+    //MessageEvent - all events that occur as a result of a message are of the MessageEvent type
+    //FocusEvent - all events that occur as a result of focus are of the FocusEvent type
+    //StorageEvent - all events that occur as a result of a storage change are of the StorageEvent type
+    //ProgressEvent - all events that occur as a result of a progress are of the ProgressEvent type
+    //PopStateEvent - all events that occur as a result of a history change are of the PopStateEvent type
+    //PageTransitionEvent - all events that occur as a result of a page transition are of the PageTransitionEvent type
+    //PointerEvent - all events that occur as a result of a pointer interaction are of the PointerEvent type
+
+    //Pointer Event is new in HTML5
+    //PointerEvent - all events that occur as a result of a pointer interaction are of the PointerEvent type
+    //traditionally, mouse events were used to handle pointer interactions
+    //it takes all mouseEvent and touchEvent properties
+
+    //Pointer Event Properties
+    //pointerId - returns a unique identifier for the pointer
+    //width - returns the width of the pointer's contact geometry
+    //height - returns the height of the pointer's contact geometry
+    //pressure - returns the normalized pressure of the pointer input in the range 0 to 1
+    //PageX - returns the horizontal coordinate of the pointer relative to the whole document
+    //PageY - returns the vertical coordinate of the pointer relative to the whole document
+    //clientX - returns the horizontal coordinate of the pointer relative to the viewport
+    //clientY - returns the vertical coordinate of the pointer relative to the viewport
+
+    //Pointer Event Methods
+    //getCoalescedEvents() - returns an array of all touch events that have occured since the last event was fired
+    //preventDefault() - cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur
+    //stopPropagation() - stops the event from bubbling up the event chain
+    //stopImmediatePropagation() - stops the event from bubbling up the event chain and prevents other event handlers from being executed
+
+    //just simple event object practice
+    document.addEventListener('click', (e)=>{
+        console.log(e);
+        console.log('$e(e.clientX, e.clientY)');
+        console.log('$e(eScreenX, eScreenY)');
+        e.target.innerHTML = 'Clicked'; //using target to change text
+        e.target.style.backgroundColor = 'red'; //using target to change background color
+    });
+</script>
+</body>
+</html>
