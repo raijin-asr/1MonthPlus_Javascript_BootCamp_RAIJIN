@@ -4,8 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Light Box Practice</title>
+    <style>
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+        .col {
+            margin: 10px;
+        }
+        img {
+            width: 300px;
+            height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+        img:hover {
+            transform: scale(1.1);
+        }
+        #imageBox {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2;
+            justify-content: center;
+            align-items: center; 
+        }
+        #newContent {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* added to center content vertically */
+            width: 100%;
+            height: 100%;
+        }
+        span#close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="row">
+        <div class="col"><img class="boxImages" src="images/masi.jpg"></div>
+        <div class="col"><img class="boxImages" src="images/messi1.jpg"></div>
+        <div class="col"><img class="boxImages" src="images/messifam.jpg"></div>
+    </div>
+
+    <div id="imageBox">
+        <span id="close-btn">X</span>
+        <div id="newContent">
+
+        </div>
+
+    </div>
+
+    <script>
+        // let images= document.getElementsByClassName('boxImages'); //use querySelectorAll() for loop foreach()
+        let images= document.querySelectorAll('img');
+        let imageBox= document.getElementById('imageBox');
+        let newContent= document.getElementById('newContent');
+        let closeBtn= document.getElementById('close-btn');
+
+        images.forEach((image)=>{
+            image.addEventListener('click', showImage);
+        }); 
+
+        function showImage(){
+            imageBox.style.display= 'flex'; //display imageBox div
+            
+            let img = document.createElement('img'); //creates img tag inside boxImage div
+            img.src = this.src; //source of image
+
+            img.style.height= 500;
+            img.style.width= 500;
+
+            newContent.innerHTML= ''; //clears the content of newContent div
+            newContent.append(img); //append img to newContent div
+        }
+
+        closeBtn.addEventListener('click', ()=> {
+            imageBox.style.display= 'none'; //hides imageBox div
+        });
+        
+    </script>
 </body>
 </html>
