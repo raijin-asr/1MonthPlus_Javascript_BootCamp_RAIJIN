@@ -4,8 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe Game</title>
+    <style>
+        #gameBoard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            margin-top: 100px;
+            border: 1px solid black;
+        }
+
+        .cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        #btnReset {
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    
+    <h1 style="text-align: center;">Tic Tac Toe Game</h1>
+    <div id="gameBoard">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+    </div>
+
+    <!-- //reset button -->
+    <!-- <button onclick="window.location.reload();">Reset</button> //direct reloading -->
+
+    <button id="btnReset">Reset</button> 
+
+
+    <script>
+        let randomPlayer = Math.floor(Math.random() * 2) === 0 ? 'X' : 'O';
+
+        const cells = document.querySelectorAll('.cell');
+
+        let currentPlayer, win, draw, winner;
+        function initialise(){
+            currentPlayer = randomPlayer;
+            win= false;
+            draw= false;
+            winner= null;
+
+            cells.forEach(cell => {
+                cell.innerHTML = '';
+            cell.addEventListener('click', handleClick);
+            }, 
+            {
+                once: true
+            });
+        }
+ 
+
+    //initialise game
+    initialise();
+
+    const resetBtn = document.getElementById('btnReset');
+    resetBtn.addEventListener('click', initialise);
+
+    function handleClick(){
+        
+        // should not click on the cell which is already filled
+        if(this.innerHTML !== '') return;
+
+        this.innerHTML = currentPlayer;
+
+        checkWinner();
+
+        if(win) {
+            alert(`Player ${winner} wins!`);
+            initialise();
+        }
+        else if(win===false && draw===true){
+            alert('Draw!');
+            initialise();
+        }
+
+        //change X to O and vice versa
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    }
+
+    const winPattern =[
+        //row
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        
+        //columns
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        
+        //diagonals
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    function checkWinner(){
+        let storeData = [].fill();
+
+        cells.forEach(cell => {
+            storeData.push(cell.innerHTML);
+        });
+
+        winPattern.forEach((pattern) =>{
+            const [a,b,c] = pattern; //destructuring data 1,2...9 to a,b,c
+
+            if(storeData[a] && storeData[b] && storeData[c]) {
+                if(storeData[a] === storeData[b] && storeData[b] === storeData[c]){
+                    win = true;
+                    winner= currentPlayer;
+                    return;
+                }
+            }
+        });
+
+        if(!storeData.includes("")){ //includes empty string
+            //draw
+            draw = true;
+            return;
+        };
+    }
+
+    </script>
 </body>
 </html>
