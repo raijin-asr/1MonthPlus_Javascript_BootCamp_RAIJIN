@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Events</title>
+</head>
+<body>
+    <!-- Keyboard Events 
+    --allows us to interact with the keyboard
+    --keydown, keyup, keypress
+    
+    --keydown: when a key is pressed: used for keyboard shortcuts
+    --keyup: when a key is released: used for form Submission
+    --keypress: when a key is pressed and released: used for text input, search bars
+
+    --event.key: returns the key value
+    --event.code: returns the code value
+    --event.which: returns the unicode value
+    --event.keyCode: returns the key code
+    --event.shiftKey: returns true if the shift key is pressed
+    --event.ctrlKey: returns true if the ctrl key is pressed
+    --event.altKey: returns true if the alt key is pressed
+    --event.metaKey: returns true if the meta key is pressed
+
+    --event.preventDefault(): prevents the default action of the event
+    --event.stopPropagation(): stops the event from bubbling up the DOM tree
+    --event.stopImmediatePropagation(): stops the event from bubbling up the DOM tree and prevents other event handlers from being executed
+
+
+
+    -->
+    <input 
+    type="text" 
+    id="inputField1" 
+    placeholder="Type here..." 
+    onkeydown="KeyDownFunction(this, event)"
+    onkeyup="KeyUpFunction(event)"
+    onkeypress="KeyPressFunction(event)"
+    >
+    <p id="output1"></p>
+
+    <input type="text" id="inputField2" placeholder="Type here...">
+    <button id="btnAdd">Add</button>
+    <p id="output2"></p>
+    <p id="list-output3"></p>
+
+    <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+    <div id="textareaOutput4"></div>
+
+    <script>
+        const inputField1 = document.getElementById('inputField1');
+        const inputField2 = document.getElementById('inputField2');
+        const output1 = document.getElementById('output1');
+        const output2 = document.getElementById('output2');
+        const output3 = document.getElementById('list-output3');
+        const btnAdd = document.getElementById('btnAdd');
+
+        function KeyDownFunction(t,e){
+            console.log('Key Down'); //when a key is pressed down and not let go
+            console.log(e); //gives the event object
+            console.log(t); //gives the target element
+            console.log(e.target); //gives the target element
+        }
+
+        function KeyUpFunction(e){
+            console.log('Key Up'); //key pressed and let go
+        }
+
+        function KeyPressFunction(e){
+            console.log('Key Press'); //key pressed
+        }
+
+        inputField1.addEventListener("keypress",function(e){
+            if(e.key === "Enter"){
+                // console.log("Enter key pressed");
+                // console.log(inputField1.value)
+
+                let outputList = document.createElement('li');
+
+                outputList.innerHTML = inputField1.value;
+                output1.append(outputList);
+                inputField1.value = ''; //emptying value of input after listing and entered
+            }
+        }
+    
+    );
+
+    btnAdd.addEventListener('click', addItemToList);
+
+    function addItemToList(){
+        let outputList2 = document.createElement('li');
+
+        if(inputField2.value){
+            outputList2.innerHTML = inputField2.value;
+            output3.append(outputList2);
+            inputField2.value = ''; //emptying value of input after listing and entered
+            }
+        }
+
+    inputField2.addEventListener('keyup', function(e) { 
+        if(e.key === "Enter"){
+            addItemToList();
+        }
+    });
+
+        inputField2.addEventListener('keydown', function(event) { //write keydown not onkeydown in parameter, likewise for keyup and keypress
+            output2.innerHTML = `
+                <p>Key: ${event.key}</p>
+                <p>Code: ${event.code}</p>
+                <p>Which: ${event.which}</p>
+                <p>KeyCode: ${event.keyCode}</p>
+                <p>ShiftKey: ${event.shiftKey}</p>
+                <p>CtrlKey: ${event.ctrlKey}</p>
+                <p>AltKey: ${event.altKey}</p>
+                <p>MetaKey: ${event.metaKey}</p>
+            `;
+        });
+
+
+        //word count in textarea field
+        const textarea = document.getElementById('textarea');
+        textarea.addEventListener('keyup', function(e){ //keyup saves value. but keydown doesn't save value, gives old value
+            let text = e.target.value;
+            let words = text.split(' '); //put words in array by separating space
+            let filteredWords= words.filter((word) => word != "");
+            let wordCount = filteredWords.length;
+            document.getElementById('textareaOutput4').innerHTML = "Words Count: "+ wordCount;
+            }
+        );
+    </script>
+</body>
+</html>
