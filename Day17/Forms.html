@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+    <!-- Forms -->
+     <h1>Forms 1</h1>
+    <form id="form1">
+        <input type="text" id="username" placeholder="Enter Username">
+        <input type="text" id="password" placeholder="Enter Password">
+        <button onclick="getData(event)">Get Data</button>
+    </form>
+
+    <h1>Forms 2</h1>
+    <form id="form2" onsubmit="submitData(event)">  <!-- form event listener -->
+        <input type="text" id="firstname" placeholder="Enter Firstname">
+        <input type="text" id="lastname" placeholder="Enter Lastname">
+        <button type="submit">Submit</button>
+    </form>
+
+    <h1>Forms 3</h1>
+    <form id="form3" onsubmit="doSomething(event)">
+        <input type="text" id="email" placeholder="Enter Email">
+        <input type="text" id="phone" placeholder="Enter Phone">
+        
+        <!-- //radio button gender male female -->
+        <input type="radio" name="gender" value="male"/>Male
+        <input type="radio" name="gender" value="female"/>Female<br>
+        
+        <!-- //checkbox -->
+        <input type="checkbox" name="hobby" value="reading"/>Reading
+        <input type="checkbox" name="hobby" value="writing"/>Writing
+        <input type="checkbox" name="hobby" value="coding"/>Coding
+        <input type="checkbox" name="hobby" value="cooking"/>Cooking
+        <br>
+
+        <!--Dropdown-->
+        <select name="country">
+            <option value="nepal">Nepal</option>
+            <option value="india">India</option>
+            <option value="china">China</option>
+            <option value="usa">USA</option>
+        </select><br>
+
+        <button type="submit">Submit Data</button>
+    </form>
+
+    <script>
+        console.log(dir(document.forms)) //show all forms in the document
+
+      //first technique: using onclick event
+      function getData(e){
+        e.preventDefault(); //does not refresh the page
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        console.log(username, password);
+        }
+
+        //second technique: using form event listener
+        function submitData(e){
+            e.preventDefault();
+            const firstname = document.getElementById('firstname').value;
+            const lastname = document.getElementById('lastname').value;
+            console.log(firstname, lastname);
+
+            //direct accessing value using target
+            const fname=e.target[0].value; //firstname
+            const lname=e.target[1].value; //lastname
+            console.log(fname, lname);
+        }
+
+        //third technique: using document object
+        function doSomething(e){
+            e.preventDefault();
+            console.log(document.forms) //shows all forms in the document
+            console.log(document.forms[2]) //shows the form at index 2
+            console.log(document.forms[2][0]) //shows the input at index 0: email
+
+            let email = document.forms[2][0].value;
+            let phone = document.forms[2][1].value;
+            console.log(email, phone);
+
+            //radio button
+            const radioBtn= document.forms[2].elements.gender; //accessing name=gender value
+            for(const radio of radioBtn){
+                if(radio.checked){
+                    console.log(radio.value);
+                }
+            }
+
+            //checkbox
+            const checkbox = document.forms[2].elements.hobby;
+            let data=[]; //to store multiple checked hobby
+            for(const check of checkbox){
+                if(check.checked){
+                    console.log(check.value);
+                    data.push(check.value); //pushing value to array
+                }
+                console.log(data);
+            }
+
+            //dropdown
+            const dropdown = document.forms[2].elements.country;
+            let selectedCountry;
+            for(const drop of dropdown){
+                if(drop.selected){
+                    console.log(drop.value);
+                    selectedCountry=drop.value;
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>
