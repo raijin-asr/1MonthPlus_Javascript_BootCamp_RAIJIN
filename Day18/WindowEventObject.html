@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Event Object</title>
+</head>
+<body>
+    <!-- Window EEvents
+        -- 1. load: (onload event) - when the page is fully loaded
+        -- 2. resize: (onresize event) - when the window is resized
+        -- 3. scroll: (onscroll event) - when the window is scrolled
+        -- 4. unload: (onunload event) - when the page is unloaded
+        -- 5. beforeunload: (onbeforeunload event) - before the page is unloaded
+        -- 6. error: (onerror event) - when an error occurs
+        -- 7. online: (ononline event) - when the browser is online
+        -- 8. offline: (onoffline event) - when the browser is offline
+
+        (already studied)
+        -- 9. click
+        -- 10. dblclick
+        -- 11. mouseenter
+        -- 12. mouseleave
+        -- 13. mouseover
+        -- 14. mouseout
+        -- 15. keydown
+        -- 16. keyup
+        -- 17. keypress
+        -- 18. focus
+        --etc....
+    -->
+
+    <h1>Window Event Object</h1>
+    <img src="asdf.jpg" alt="image" onerror="imgError()">
+
+    <script src="errorInScript.js" onerror="scriptError()"></script>
+
+    <script>
+        //1. load event
+        window.onload = function(){
+            console.log('Page is fully loaded');
+        }
+
+        //2. resize event
+        window.onresize = function(){
+            console.log('Window is resized');
+        }
+
+        //3. scroll event
+        window.onscroll = function(){
+            console.log('Window is scrolled');
+        }
+
+        //4. unload event
+        window.onunload = function(){
+            console.log('Page is unloaded');
+        }
+
+        //5. beforeunload event
+        window.onbeforeunload = function(){
+            return 'Are you sure you want to leave?';
+        }
+
+        //6. error event
+        window.onerror = function(){
+            console.log('An error occured');
+        }
+
+        window.onerror = function(message, url, line, column, error){
+            console.log(message); //error message
+            console.log(url); //url of the page
+            console.log(line); //line number
+            console.log(column); //column number
+            console.log(error); //error object
+
+        }
+
+        function scriptError(){
+            console.log('Script not found');
+            document.body.innerHTML = '<h1>Website not able to load</h1>';
+        }
+
+        function imgError(){
+            console.log('Image not found');
+        }
+
+        //7. online event
+        window.ononline = function(){
+            console.log('Browser is online');
+        }
+
+        //8. offline event
+        window.onoffline = function(){
+            console.log('Browser is offline');
+        }
+    </script>
+</body>
+</html>
