@@ -6,6 +6,67 @@
     <title>Clipboard Events</title>
 </head>
 <body>
-    
+    <!-- In Js, we can listen to the clipboard events like copy, cut, and paste. -->
+    <!-- interact with the clipboard using Clipboard API, which provides events, methods to work with clipboard data.
+     Events are 1. Copy , 2. Cut , 3. Paste -->
+     <!-- in console, when we copy using mouse or keyboard, it will show clipboard event -->
+
+    <p>Copy this part</p>
+    <input type="text" placeholder="Write Data to Clipboard">
+    <button id="copy" onclick="copyData()">Copy</button>
+    <button id="cut" onclick="cutData()">Cut</button>
+    <script>
+        const btnCopy = document.getElementById('copy');
+        const btnCut = document.getElementById('cut');
+        const input = document.querySelector('input');
+
+        // copy event
+        document.addEventListener('copy', function(e){
+            console.log('Text Copied');
+            // if used e.preventDefault(), it will prevent the text from being copied
+            
+            //clipboard
+            const selectionText = window.getSelection(); // it will select the text
+            let clipboardData = e.clipboardData || window.clipboardData; // it will get the clipboard data
+            clipboardData.setData('text', selectionText.toString()); // it will set the data to clipboard data
+            console.log('Copied Selected Text:', selectionText.toString()); // it will show the copied text
+        });
+
+        function copyData(){
+            document.execCommand('copy'); // it will copy the text
+            console.log('Text Copied using button');
+        }
+
+        // cut event
+        document.addEventListener('cut', function(e){
+            console.log('Text Cut');
+            // if used e.preventDefault(), it will prevent the text from being cut
+
+            //clipboard
+            const selectionText = window.getSelection(); // it will select the text
+            let clipboardData = e.clipboardData || window.clipboardData; // it will get the clipboard data
+            clipboardData.setData('text', selectionText.toString()); // it will set the data to clipboard data
+            document.execCommand('delete'); // it will delete the text
+            console.log('Cut Selected Text:', selectionText.toString()); // it will show the cut text
+
+            //cut thing wont be removed from DOM, so use input field
+            input.value = selectionText.toString();
+
+        }); 
+
+        function cutData(){
+            document.execCommand('cut'); // it will cut the text
+            console.log('Text Cut using button');
+        }
+
+        // paste event
+        document.addEventListener('paste', function(e){
+            let copiedText= e.clipboardData.getData('text'); // it will get the data from clipboard
+            input.value +=  copiedText; // it will paste the data
+            console.log('Text Pasted');
+        });
+
+
+    </script>
 </body>
 </html>
