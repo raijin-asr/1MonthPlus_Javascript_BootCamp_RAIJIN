@@ -6,6 +6,48 @@
     <title>Custom Events</title>
 </head>
 <body>
-    
+    <!-- Custom events are events that are created by the user. 
+    They are useful when you want to create your own events and handle them in your code. 
+    You can create custom events using the Event constructor and dispatch them using the dispatchEvent() method. 
+    Here is an example that demonstrates how to create and dispatch a custom event: -->
+    <!-- It is inherited from Event class.
+    it can work for DOM manipulation and own event without any DOM manipulation. -->
+    <!-- not fired by browser and also known as synthetic event. -->
+
+    <button id="btn">Click me</button>
+
+    <script>
+        // Syntax:
+        let customEvent = new CustomEvent('newCustomEvent'); //creating custom event
+        document.addEventListener('newCustomEvent', function() {
+            console.log('Custom event fired');
+        });
+
+        document.dispatchEvent(customEvent); // Custom event fired
+
+        let btn = document.getElementById('btn');
+        //custom event with two arguments
+        let customEvent2 = new CustomEvent('personDetail'
+        , {
+            detail: { //detail has to be there as object format when two arguments are there.
+                name: 'John',
+                age: 25
+            }
+        }); //creating custom event
+
+        btn.addEventListener("personDetail", function(e){
+            console.log('Custom event fired with detail: ', e.detail);
+        });
+
+        btn.dispatchEvent(customEvent2); // trigger Custom event fired with detail:  {name: "John", age: 25}
+
+        //example
+        var event = new Event('build');
+        document.addEventListener('build', function(e) {
+            console.log('Custom event fired');
+        });
+
+        document.dispatchEvent(event); // Custom event fired
+    </script>
 </body>
 </html>
