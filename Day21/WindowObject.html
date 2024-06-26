@@ -6,6 +6,157 @@
     <title>Window Object by Raijin</title>
 </head>
 <body>
-    
+    <!-- Window object is object of browser window. -->
+     <!-- its functions are: 
+        1. open() - open a new window.
+        2. close() - close the current window.
+        3. alert() - display an alert box with a specified message and an OK button.
+        4. confirm() - display a dialog box with a specified message, along with an OK and a Cancel button.
+        5. prompt() - display a dialog box that prompts the visitor for input.
+        6. setTimeout() - call a function or evaluate an expression after a specified number of milliseconds.
+        7. setInterval() - call a function or evaluate an expression at specified intervals (in milliseconds).
+        8. document - returns the Document object for the window (the root element of the HTML document).
+        9. innerWidth - returns the width of the window's content area.
+        10. innerHeight - returns the height of the window's content area.
+        11. scrollX - returns the number of pixels that the document has already been scrolled horizontally.
+        12. scrollY - returns the number of pixels that the document has already been scrolled vertically.
+        13. location - returns the Location object for the window (contains information about the current URL).
+        14. history - returns the History object for the window (contains the browser's history).
+        15. screen - returns the Screen object for the window (contains information about the user's screen).
+        16. navigator - returns the Navigator object for the window (contains information about the visitor's browser).
+        17. localStorage - allows you to store data with no expiration date.
+        18. sessionStorage - allows you to store data for one session (data is lost when the browser tab is closed). 
+     -->
+    <button id = "btnOpen">Open Window</button>
+    <button id = "btnClose">Close Window</button>
+    <button id = "btnAlert">Alert</button>
+    <button id = "btnConfirm">Confirm</button>
+    <button id = "btnPrompt">Prompt</button>
+    <button id = "btnSetTimeout">Set Timeout</button>
+    <button id = "btnSetInterval">Set Interval</button>
+    <button id = "btnDocument">Document</button>
+    <button id = "btnInnerWidth">Inner Width</button>
+    <button id = "btnInnerHeight">Inner Height</button>
+    <button id = "btnScrollX">Scroll X</button>
+    <button id = "btnScrollY">Scroll Y</button>
+    <button id = "btnLocation">Location</button>
+    <button id = "btnHistory">History</button>
+    <button id = "btnScreen">Screen</button>
+    <button id = "btnNavigator">Navigator</button>
+    <button id = "btnLocalStorage">Local Storage</button>
+    <button id = "btnSessionStorage">Session Storage</button>
+
+    <script>
+        const btnOpen = document.getElementById('btnOpen');
+        const btnClose = document.getElementById('btnClose');
+        const btnAlert = document.getElementById('btnAlert');
+        const btnConfirm = document.getElementById('btnConfirm');
+        const btnPrompt = document.getElementById('btnPrompt');
+        const btnSetTimeout = document.getElementById('btnSetTimeout');
+        const btnSetInterval = document.getElementById('btnSetInterval');
+        const btnDocument = document.getElementById('btnDocument');
+        const btnInnerWidth = document.getElementById('btnInnerWidth');
+        const btnInnerHeight = document.getElementById('btnInnerHeight');
+        const btnScrollX = document.getElementById('btnScrollX');
+        const btnScrollY = document.getElementById('btnScrollY');
+        const btnLocation = document.getElementById('btnLocation');
+        const btnHistory = document.getElementById('btnHistory');
+        const btnScreen = document.getElementById('btnScreen');
+        const btnNavigator = document.getElementById('btnNavigator');
+        const btnLocalStorage = document.getElementById('btnLocalStorage');
+        const btnSessionStorage = document.getElementById('btnSessionStorage');
+
+
+         btnOpen.addEventListener('click',()=>{
+            window.open(); //open new window
+            window.open('https://www.google.com','_blank','width=500,height=500');
+         });
+
+            btnClose.addEventListener('click',()=>{
+                window.close(); //close current window
+            });
+
+            btnAlert.addEventListener('click',()=>{
+                window.alert('This is an alert box'); //display an alert box with a specified message and an OK button.
+            });
+
+            btnConfirm.addEventListener('click',()=>{
+                window.confirm('This is a confirm box'); //display a dialog box with a specified message, along with an OK and a Cancel button.
+            });
+
+            btnPrompt.addEventListener('click',()=>{
+                window.prompt('This is a prompt box'); //display a dialog box that prompts the visitor for input.
+            });
+
+            btnSetTimeout.addEventListener('click',()=>{
+                setTimeout(()=>{
+                    alert('This is a setTimeout function');
+                },3000); //call a function or evaluate an expression after a specified number of milliseconds.
+            });
+
+
+            btnSetInterval.addEventListener('click',()=>{
+                setInterval(()=>{
+                    alert('This is a setInterval function');
+                },3000); //call a function or evaluate an expression at specified intervals (in milliseconds).
+            });
+
+            btnDocument.addEventListener('click',()=>{
+                console.log(window.document); //returns the Document object for the window (the root element of the HTML document).
+            });
+
+            btnInnerWidth.addEventListener('click',()=>{
+                console.log(window.innerWidth); //returns the width of the window's content area.
+            });
+
+            btnInnerHeight.addEventListener('click',()=>{
+                console.log(window.innerHeight); //returns the height of the window's content area.
+            });
+
+
+            btnScrollX.addEventListener('click',()=>{
+                console.log(window.scrollX); //returns the number of pixels that the document has already been scrolled horizontally.
+            });
+
+            btnScrollY.addEventListener('click',()=>{
+                console.log(window.scrollY); //returns the number of pixels that the document has already been scrolled vertically.
+            });
+
+            btnLocation.addEventListener('click',()=>{
+                console.log(window.location); //returns the Location object for the window (contains information about the current URL).
+                console.log(window.location.href); //returns the href (URL) of the current page
+                console.log(window.location.pathname); //returns the path and filename of the current page
+            });
+
+            btnHistory.addEventListener('click',()=>{
+                console.log(window.history); //returns the History object for the window (contains the browser's history).
+                console.log(window.history.forward()); //loads the next URL in the history list
+                console.log(window.history.back()); //loads the previous URL in the history list
+                console.log(window.history.go(2)); //loads a specific URL from the history list
+                console.log(window.history.go(-1)); //loads the previous URL in the history list
+                
+            });
+
+            btnScreen.addEventListener('click',()=>{
+                console.log(window.screen); //returns the Screen object for the window (contains information about the user's screen).
+            });
+
+            btnNavigator.addEventListener('click',()=>{
+                console.log(window.navigator); //returns the Navigator object for the window (contains information about the visitor's browser).
+                console.log(window.navigator.geolocation.getCurrentPosition(function(position){
+                    console.log(position);
+                })); //returns the current position of the user.
+            });
+
+            btnLocalStorage.addEventListener('click',()=>{
+                console.log(window.localStorage); //allows you to store data with no expiration date.
+            });
+
+            btnSessionStorage.addEventListener('click',()=>{
+                console.log(window.sessionStorage); //allows you to store data for one session (data is lost when the browser tab is closed).
+            });
+
+
+    </script>
 </body>
 </html>
