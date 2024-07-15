@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persisting CLient-side data</title>
+</head>
+<body>
+    <!-- persisting allows to keep data available even after the page is reloaded -->
+      <!-- or even user refreshes page, closes or reopens the browser or navigates away and return -->
+       <!-- 1. Session Management
+       2. User Preferences(languages, themes, etc)
+       3. Tracking and Analytics
+
+       1. Session Management
+         - Session management is the process of keeping track of a user's activity across sessions.
+            - A session is a series of requests made by a user within a certain time frame.
+            - Sessions are used to keep track of user activity and store user data.
+
+        2. User Preferences
+            - User preferences are settings that a user can customize to make their experience more personalized.
+            - User preferences can include things like language, theme, font size, etc.
+            - User preferences are stored on the client-side so that they persist across sessions.
+
+        3. Tracking and Analytics
+            - Tracking and analytics are used to collect data about user behavior and activity.
+            - This data can be used to analyze user behavior, improve user experience, and make data-driven decisions.
+            - Tracking and analytics data is stored on the client-side so that it persists across sessions.
+             -->
+
+        <!-- * Sensitive data are never stored in client side, if stored with encryption -->
+        <!-- * Cookies are used to store data on the client-side -->
+        <!-- * Cookies are sent to the server with every request -->
+        <!-- * Cookies have a size limit of 4KB -->
+         <!-- cookies vulnerable to cross site scripting attacks
+         oldest and first way of storing data on client side
+         it is auto deleted on expire(immediately after broswer closed or after 30 minutes), attached to the header of request -->
+        <!-- * Cookies can be set to expire after a certain time or be deleted when the browser is closed -->
+        <!-- * Cookies can be used to store user preferences, session data, and tracking information -->
+        <!-- * Cookies can be used to track user activity across sessions -->
+        
+    <!-- it comes under Web Storage API, js api feature provided by browser -->
+    <!-- web storage API are: LocalStorage, SessionStorage, indexedDB -->
+        <!-- * Local Storage and Session Storage are used to store data on the client-side -->
+        <!-- * Local Storage and Session Storage are more secure than cookies -->
+        <!-- * Local Storage and Session Storage are limited to the browser and the domain they are stored on -->
+        <!-- * Local Storage and Session Storage are not sent to the server with every request -->
+        <!-- hold upto 5MB of data, runs on offline mode too, not auto deleted, attached to the browser
+        --used by YOutube, microsoft office, google drive, etc -->
+
+        <!-- //for local Storage: change name by inputting name in input field -->
+        <input type="text" id="name" placeholder="Enter your name">
+
+        <script>
+            document.cookie = "name=Ameer Rai; address=Ktm; expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/;"; //date is toUTCString
+            // document.cookie = "address=Kathmandu; expires=${new Date(Date.now() + 1000*60*60*24).toUTCString()}; path=/;"; //expires in 24 hours
+            console.log(document.cookie); //shows all cookie data
+
+            let cookieData= document.cookie;
+            let cookiesSplit = cookieData.split(';');
+
+            let data={};
+            for(const cookieValue of cookiesSplit){
+                let key= cookieValue.split("=")[0];
+                let value= cookieValue.split("=")[1];
+                //console.log(`Key: ${key}, Value: ${value}`);
+
+                data= {...data, [key]: value}; //key in [] bracket because key is taken as object key               
+            }
+
+            console.log("Data:",data);
+            console.log(data.name);
+            console.log(data.address);
+            // document.body.innerHTML = `<h1>${data.name}</h1><p>${data.address}</p>`;
+
+            //directly accessing cookie data
+            let name = document.cookie.split(';').find(cookie => cookie.includes('name')).split('=')[1];
+            //console.log(name);
+
+            //accessing cookie data using function
+            function getCookie(name){
+                let cookie = document.cookie.split(';').find(cookie => cookie.includes(name));
+                return cookie ? cookie.split('=')[1] : null;
+            }
+
+            console.log(getCookie('age')); //null
+            console.log(getCookie('name')); //Ameer Rai
+            console.log(getCookie('address')); //Ktm
+
+            //delete cookie
+            document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;"; //just keep name empty
+            console.log(document.cookie);
+
+//local storage
+            //set data
+            localStorage.setItem('name', 'Ameer S Rai'); //set data
+            localStorage.setItem('address', 'Kathmandu');
+
+            //get data
+            let fullname = localStorage.getItem('name'); //get data
+            console.log(fullname);
+
+            // console.log(localStorage.key(0)); //name
+            // console.log(localStorage.key(1)); //address
+
+            //remove data
+            // localStorage.removeItem('name'); //remove data
+
+            // localStorage.clear(); //clear all data
+
+            const inputName= document.getElementById('name');
+            inputName.addEventListener('keyup', function(e){
+            if(e.key === 'Enter'){
+                localStorage.setItem('name', inputName.value);
+            }
+            });
+
+            //putting object by converting to string in localstorage
+            const user = {
+                name: 'Ram Rai',
+                address: 'Pokhara'
+            };
+
+            localStorage.setItem('user', JSON.stringify(user));
+
+            //getting object using parse from localstorage
+            let userString = localStorage.getItem('user');
+            let userObj = JSON.parse(userString);
+            console.log(userObj.name);
+        </script>
+</body>
+</html>
