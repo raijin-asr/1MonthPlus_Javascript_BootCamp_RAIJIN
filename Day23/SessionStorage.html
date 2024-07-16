@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Storage</title>
+</head>
+<body>
+    <!-- Session Storage is another web storage API, allows to store key value paris in web browser session storage.
+    similar to local storage but is has shorter life cycle
+    data stored in it is only available for the duration of the page session
+    lasts as long as browser or window is open and once closes data is removed
+
+    functions same as local storage
+    but the only difference is that data is not persistent and limited to current window tab or browser session
+    use case: Ecommerce shopping, cart, login details, multi step form, progress tracking, tutorials or achievements
+    size limit is 5MB 
+    -->
+
+    <h1>Session Storage</h1>
+
+    <h4>Difference between cookies, Local Storage, and Session Storage</h4>
+    <table>
+        <tr>
+            <th>Feature</th>
+            <th>Cookies</th>
+            <th>Local Storage</th>
+            <th>Session Storage</th>
+        </tr>
+        <tr>
+            <td>Storage Capacity</td>
+            <td>4KB</td>
+            <td>5MB</td>
+            <td>5MB</td>
+        </tr>
+        <tr>
+            <td>Accessible from</td>
+            <td>Any window</td>
+            <td>Any window</td>
+            <td>Current window</td>
+        </tr>
+        <tr>
+            <td>Expires</td>
+            <td>Manually set</td>
+            <td>Never</td>
+            <td>On tab close</td>
+        </tr>
+        <tr>
+            <td>Storage Location</td>
+            <td>Browser and server</td>
+            <td>Browser</td>
+            <td>Browser</td>
+        </tr>
+        <tr>
+            <td>Send with HTTP request</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td>Blockable by users</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>Supported data types</td>
+            <td>string only</td>
+            <td>string only</td>
+            <td>string only</td>
+        </tr>
+
+    </table>
+    <script>
+        // set item in session storage
+        sessionStorage.setItem('name', 'John Doe');
+        sessionStorage.setItem('age', 30);
+
+        // get item from session storage
+        let name = sessionStorage.getItem('name');
+        let age = sessionStorage.getItem('age');
+
+        console.log(name);
+        console.log(age);
+
+        // remove item from session storage
+        sessionStorage.removeItem('name');
+
+        // clear all items from session storage
+        sessionStorage.clear();
+
+    </script>
+</body>
+</html>
