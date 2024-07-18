@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App using JS</title>
+</head>
+<body>
+    <h1>Todo App</h1>
+    <input type="text" id="todoInput" placeholder="Enter your todo">
+    <input type="date" id="todoDate">
+    <button id="btnAddTodo">Add Todo</button>
+
+    <div id="todoList">
+    </div>
+
+    <script>
+        let todoData=[]; // Array to store todo data
+        // [value:"", date:""]
+
+        const todoInput = document.getElementById('todoInput');
+        const todoDate = document.getElementById('todoDate');
+        const btnAddTodo = document.getElementById('btnAddTodo');
+        const todolist= document.getElementById('todoList');
+
+        window.onload = function(){
+            //getting the todo data from local storage
+            let data = localStorage.getItem('todoData');
+            if(data){
+                todoData = JSON.parse(data); //converting string to array
+                renderTodo();
+            }
+        }
+        //using enter key to add todo   
+        todoInput.addEventListener('keyup', function(event){
+                if(event.key === "Enter"){
+                    addTodo();                
+                }
+            });
+
+        //using button to add todo
+        btnAddTodo.addEventListener('click', function(){
+            addTodo();
+        });
+
+        function addTodo(){
+            if(todoInput.value === ""){
+                alert("Please enter a todo");
+            }else{
+                todoData.push({value: todoInput.value, date: todoDate.value});
+                
+                //storing the todo data in local storage
+                localStorage.setItem('todoData', JSON.stringify(todoData)); //converting array to string
+                todoInput.value = "";
+                renderTodo();
+            }
+        }
+
+        function renderTodo(){
+            if(todoData.length>0){
+                todoList.innerHTML = ""; //removing old list
+                todoData.forEach((todo,index) =>{
+                    // let todoList = document.createElement('li');
+                    // todoList.innerHTML = todo.value + " " + todo.date;
+                    // document.getElementById('todoList').appendChild(todoList);
+
+                    //single line
+                    todoList.innerHTML += `
+                    <div style="display: flex; justify-content: space-between; padding:4px;">
+                        <li> ${todo.value} || ${todo.date} </li>
+                        <button onclick="deleteTodoByIndex(${index})">Delete</button>
+                    </div>
+                    `;
+                });
+            }
+            else{
+                todoList.innerHTML = "No todo added yet";
+            }
+        }
+
+        // <button onclick="deleteTodoByValue('${todo.value}')">Delete</button>
+        // function deleteTodoByValue(todoValue){
+        //     //using filter to remove the todo data
+        //     todoData = todoData.filter((todo) => todo.value !== todoValue);
+        //     renderTodo();
+        // }
+
+        function deleteTodoByIndex(index){
+            let response= confirm("Are you sure you want to delete this todo?");
+            if(response===true){
+            todoData= todoData.filter((_, i) => i != index);
+            localStorage.setItem('todoData', JSON.stringify(todoData)); //setting the updated data in local storage
+            renderTodo();
+            }
+        }
+        
+    </script>
+</body>
+</html>
