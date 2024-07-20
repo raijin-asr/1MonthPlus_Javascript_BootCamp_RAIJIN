@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html 5 Canvas Graphics in jS</title>
+</head>
+<body>
+    <!-- In HTML5, we can draw graphics on the webpage using the <canvas> element. The <canvas> element is used to draw graphics, on the fly, via JavaScript. -->
+        <!-- canvas is container for graphics, where we can draw graphics using js. -->
+
+        <canvas id="myCanvas"></canvas>
+
+        <!-- canva methods
+        1. lineTo(x, y) : Adds a new point and creates a line to that point from the last specified point in the canvas.
+        2. moveTo(x, y) : Moves the path to the specified point in the canvas, without creating a line.
+        3. stroke() : Actually draws the path you have defined.
+        4. arc(x, y, radius, startAngle, endAngle, anticlockwise) : Creates an arc/curve. To create a circle with arc(): Set start angle to 0 and end angle to 2*Math.PI. 
+        5. rect(x, y, width, height) : Creates a rectangle.
+        6. fill() : Fills the current drawing (path). The default color is black.
+        7. fillText(text, x, y) : Draws "filled" text on the canvas.
+        8. createLinearGradient(x0, y0, x1, y1) : Creates a linear gradient (used to fill shapes).
+        -->
+
+        <div>
+            <input type="number" id="radiusField" placeholder="x">
+            <button onclick="updateRadius()">Update Radius</button>
+            <a id="downloadCan" onclick="downloadCanvas(this)" href="" download="canvas.png">Download Canvas</a>
+        </div>
+<script>
+const canvas = document.getElementById('myCanvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight-300;
+
+canvas.style.border = '2px solid black';
+
+let ctx = canvas.getContext("2d") // 2d graphics
+ctx.moveTo(0, 0); // start point
+ctx.lineTo(200, 100); // end point
+ctx.strokeStyle = 'red'; // color of line
+ctx.stroke(); // draw line
+
+//circle
+ctx.beginPath(); // start new path
+ctx.fillStyle = 'green';
+
+ctx.arc(200, 100, 50, 0, 2*Math.PI); // x, y, radius, startAngle, endAngle
+//Math.PI = 180 degree *2 = 360 degree (full circle)
+ctx.strokeStyle = 'blue';
+ctx.stroke();
+ctx.fill();
+
+//rectangle
+ctx.beginPath();
+ctx.rect(300, 100, 100, 100); // x, y, width, height
+ctx.fillStyle = 'yellow';
+ctx.strokeStyle = 'black';
+ctx.stroke();
+ctx.fill();
+
+//linear gradient
+let grd = ctx.createLinearGradient(0, 200, 200, 0); // x0, y0, x1, y1
+grd.addColorStop(0, 'red');
+grd.addColorStop(0.5, 'green');
+grd.addColorStop(1, 'blue');
+
+ctx.fillStyle = grd;
+ctx.fillRect(0, 200, 200, 100);
+
+
+//text
+ctx.font = '30px Arial';
+ctx.fillStyle = 'black';
+ctx.fillText('Hello World', 200, 200);
+
+//strokeText
+ctx.font = '30px Arial';
+ctx.strokeStyle = 'black';
+ctx.strokeText('Hello World', 200, 250);
+
+//animation
+let x= 300;
+let y= 300;
+function animation(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(x, y, 50, 0, 2*Math.PI);
+    ctx.fillStyle = 'red';
+    ctx.stroke();
+    ctx.fill();
+    if(x>canvas.width){
+        x=300;
+    }
+    if(y>canvas.height){
+        y=300;
+    }
+    x+=10;
+    y+=10;
+    requestAnimationFrame(animation);
+}
+
+// animation();
+
+function animationRandom(){
+
+    setTimeout(()=> {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    },5000);
+
+    ctx.beginPath();
+    ctx.arc(
+        Math.random()*canvas.width,
+        Math.random()*canvas.height,
+        50,
+        0,
+        2*Math.PI);
+
+    ctx.fillStyle = 'rgb(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255})';
+    ctx.stroke();
+    ctx.fill();
+  
+    requestAnimationFrame(animationRandom);
+}
+
+// animationRandom();
+
+//showing ball when clicked
+let radius=30;
+function showBallwhenClicked(x,y){
+
+setTimeout(()=> {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+},5000);
+
+ctx.beginPath();
+ctx.arc(
+    x,
+    y,
+    radius,
+    0,
+    2*Math.PI);
+
+ctx.fillStyle = 'rgb(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255})';
+ctx.stroke();
+ctx.fill();
+}
+
+// document.addEventListener('click', (e)=>{
+//     // showBallwhenClicked(e.clientX, e.clientY);
+// });
+
+//showing ball when mousemove
+document.addEventListener('mousemove', (e)=>{
+    showBallwhenClicked(e.clientX, e.clientY);
+});
+
+//clear canvas when escape key is pressed
+document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+});
+
+function updateRadius(){
+    radius = document.getElementById('radiusField').value;
+
+}
+
+//download canvas
+function downloadCanvas(e){
+    a.href = canvas.toDataURL(); // convert canvas to image
+}
+
+</script>
+
+</body>
+</html>
