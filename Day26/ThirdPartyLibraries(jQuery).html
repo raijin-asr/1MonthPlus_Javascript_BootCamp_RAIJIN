@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Third Party Libraries: jQuery</title>
+    <style>
+        .container{
+            background-color: blue;
+        }   
+    </style>
+</head>
+<body>
+    <!-- We use third party libraries to make our work easier.
+    we don't have to write everything from scratch. 
+    we can use libraries that are already available.
+    99% libraries are free, saves time and effort.
+    plugins, dependencies, module, etc.
+    
+    libraries are: react.js, vue.js, jquery.js, chart.js, aos.js, leaflet.js, moment.js, loadsh.js, etc.
+    react.js is a library for building user interfaces.
+    vue.js is a library for building interactive web interfaces.
+    chart.js is a library for creating charts.
+    aos.js is a library for animating elements.(animate on scroll)
+    leaflet.js is a library for creating interactive maps.
+    moment.js is a library for parsing, validating, manipulating, and formatting dates.
+    loadsh.js is a library for working with arrays, numbers, objects, strings, etc.
+
+    One of the most popular third party libraries is jQuery. 
+    It is a fast, small, and feature-rich JavaScript library.
+    It makes things like HTML document traversal and manipulation, event handling, and animation much simpler with an easy-to-use API that works across a multitude of browsers. 
+    With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.
+ 
+    mis.js is minified version and it grunted version of jQuery. cant understand and steal the code. -->
+    <!-- minified (min.js) code saves size and can be formatted using beautify website -->
+
+    <p>Learning jQuery</p>
+    <span id="my_paragraph" title="this is title of paragraph">Paragraph</span>
+
+    <div id="myDiv" class="divClass"> 
+        Div of jQuery
+    </div>
+    <button id="animateBtn" onclick="animate()">Animate</button><br>
+
+    <div id="hideShowDiv" class="divClass"> 
+        Hide and show this
+    </div>
+    <button id="hideShowbtn" onclick="hideDiv()">Hide</button>
+    <button id="hideShowbtn" onclick="showDiv()">Show</button><br><br>
+    <input type="text" id="name">
+    <button id="btn" onclick="myFunction()">Click</button>
+    <br><button id="btnNew">New Btn</button>
+</body>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" ></script>
+
+<script>
+    //$ is object of jQuery, shorthand for jQuery, constructor function
+    // $ is a function that takes a string, function, object,array as an argument
+    //or use jQuery instead of $, $ is a shorthand for jQuery
+    
+    $("p").css("color", "red"); //(style) css is a styling method of jQuery
+    $("P").html("Hello World"); //(innerHtml) html is a method of jQuery to change the content of the element
+    $("p").append("<h1>Append: jQuery</h1>"); //append is a method of jQuery to add content inside the element
+
+    $("p").before("<h1>Before</h1>"); //before is a method of jQuery to add content before the element
+    $("p").after("<h1>After</h1>"); //after is a method of jQuery to add content after the element
+
+    let data= $("my_paragraph").attr("title"); //attr is a method of jQuery to change the attribute of the element
+    let newAttribute= $("my_paragraph").attr("new_attrib","new data"); //attr is a method of jQuery to change the attribute of the element
+    console.log(data);
+
+    //adding style .container to div
+    $("#myDiv").addClass("container"); //addClass is a method
+
+    //removing style .container from div
+    $("#myDiv").removeClass("container"); //removeClass is a method
+    $("#myDiv").removeAttr("class"); //removeAttr is a method to remove attribute
+
+    //accessing value
+    function myFunction(){
+        let name= $("#name").val(); //val is a method of jQuery to get the value of the input field
+        $("#name").val("function overloading"); //val is a method of jQuery to set the value of the input field
+    }
+
+    //using click
+    $("#btnNew").click(function(e){
+        console.log("clicked");
+    });
+
+    //key press
+    $(document).keypress(function(){
+        console.log("key pressed");
+    });
+
+    //jQuery has extra features: like handleObj,deleteTarget etc.
+
+    //own event
+    $("#btn").on("click", function(){
+        console.log("own event clicked");
+    });
+
+    //styling div
+    $("#myDiv").css({
+        backgroundColor: "red",
+        height: "100px",
+        width: "100px"
+    });
+
+    //animate
+    function animate()
+    {
+        $("#myDiv").animate({ //properties argument
+                height: "300px",
+                width: "300px"
+            }, 
+            3000, //duration argument
+            function(){ //callback argument: completed function
+                // $("myDiv").append("<h1>Animation Completed</h1>");
+                $(this).fadeOut(); //this refers to the element that is being animated
+            }
+        ); //3000 is the time in milliseconds
+    }
+
+    //hide or show div
+    function hideDiv(){
+        $("#hideShowDiv").hide(3000); //hide is a method of jQuery to hide the element
+    }
+
+    function showDiv(){
+        $("#hideShowDiv").show(3000); //hide is a method of jQuery to hide the element
+    }
+
+</script>
+
+</html>

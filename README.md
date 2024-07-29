@@ -25,7 +25,3 @@
     Day24: Todo list mini project
     Day25: Html5 canvas in js
     Day26: Third Party Libraries basics, JQuery Setup and Practice
-    Day27: Aos.js and Leaflet.js setup and practice
-    Day28: Exception Handling
-    Day29: Regular Expression
-    
