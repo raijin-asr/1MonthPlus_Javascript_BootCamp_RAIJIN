@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aos Js Library</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        .divRed {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 10px;
+        }
+        .divGreen {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            margin: 10px;
+        }
+        #div15 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            margin: 10px;
+        }
+
+    /* Adding Custom  */
+    [data-aos="new-animation"] {
+        opacity: 0;
+        transition-property: transform, opacity;
+      
+        &.aos-animate {
+          opacity: 1;
+        }
+      
+        @media screen and (min-width: 768px) {
+          transform: translateX(100px);
+      
+          &.aos-animate {
+            transform: translateX(0);
+          }
+        }
+      }
+    </style>
+</head>
+<body>
+    <!-- AOS: Animate on Scroll library -->
+
+    <!-- Fade Animation -->
+    <div data-aos="fade-in" class="divRed" data-aos-duration="2000"></div>
+    <div data-aos="fade-up" class="divGreen" data-aos-offset="300"></div> <!-- Offset: 300px -->
+    <div data-aos="fade-down" class="divRed"></div>
+    <div data-aos="fade-left" class="divGreen"></div>
+    <div data-aos="fade-up-left" class="divRed"></div>
+    <div data-aos="fade-up-right" class="divGreen"></div>
+    <div data-aos="fade-down-left" class="divRed"></div>
+    <div data-aos="fade-down-right" class="divGreen"></div>
+
+    <!-- Flip Animation -->
+    <div data-aos="flip-up" class="divRed" data-aos-duration="3000"></div>
+    <div data-aos="flip-down" class="divGreen" data-aos-easing="ease-in-sine"></div>
+    <div data-aos="flip-left" class="divRed"></div>
+    <div data-aos="flip-right" class="divGreen"></div>
+
+    <!-- Slide Animation -->
+    <div data-aos="slide-up" class="divRed" data-aos-duration="2000"></div>
+    <div data-aos="slide-down" class="divRed"  data-aos-easing="linear"></div>
+    <div data-aos="slide-left" class="divGreen"></div>
+    <div data-aos="slide-right" class="divRed"></div>
+
+    <!-- Zoom Animation -->
+    <div data-aos="zoom-in" class="divGreen"></div>
+    <div data-aos="zoom-out" class="divRed"></div>
+    <div data-aos="zoom-in-down" class="divGreen"></div>
+    <div data-aos="zoom-in-up" class="divRed"></div>
+    <div data-aos="zoom-in-left" class="divGreen"></div>
+    <div data-aos="zoom-in-right" class="divRed"></div>
+    <div data-aos="zoom-out-down" class="divGreen"></div>
+    <div data-aos="zoom-out-up" class="divRed"></div>
+    <div data-aos="zoom-out-left" class="divGreen"></div>
+    <div data-aos="zoom-out-right" class="divRed"></div>
+
+
+    <!-- Rotate Animation -->
+    <div data-aos="rotate" id="divGreen"></div>
+    
+    <div data-aos-anchor-placement="top-bottom" id="divGreen"></div>
+    <div data-aos-anchor-placement="top-center" id="divGreen"></div>
+    <div data-aos-anchor-placement="top-top" id="divGreen"></div>
+    <div data-aos-anchor-placement="center-bottom" id="divGreen"></div>
+    <div data-aos-anchor-placement="center-center" id="divGreen"></div>
+    <div data-aos-anchor-placement="center-top" id="divGreen"></div>
+    <div data-aos-anchor-placement="bottom-bottom" id="divGreen"></div>
+    <div data-aos-anchor-placement="bottom-center" id="divGreen"></div>
+    <div data-aos-anchor-placement="bottom-top" id="divGreen"></div>
+    
+    <!-- Custom Animation -->
+    <div data-aos="new-animation"></div>
+        
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+</body>
+</html>

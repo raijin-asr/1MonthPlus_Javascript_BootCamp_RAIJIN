@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js</title>
+
+</head>
+<body>
+    
+    <!-- Chart.js is a JavaScript library that allows you to create beautiful charts to represent different types of data. Aos.js is a library that allows you to animate the elements of your website as you scroll down the page. Leaflet.js is a library that allows you to create interactive maps on your website. -->
+    <div>
+        <canvas id="myChart1"></canvas>
+        <canvas id="myChart2"></canvas>
+      </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx1 = document.getElementById('myChart1');
+    const ctx2 = document.getElementById('myChart2');
+  
+    //bar chart
+    new Chart(ctx1, {
+      type: 'bar', //just change this to "line", "pie", "doughnut", "radar", "polarArea", "bubble", "scatter", "area", "mixed", "bar", "horizontalBar", "pie", "doughnut", "radar", "polarArea", "bubble", "scatter", "area", "mixed
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    //line chart
+    new Chart(ctx2, {
+      type: 'pie',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: 'Colors',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1,
+          backgroundColor: ['red', 'blue', 'yellow', 'green', 'purple', 'orange']
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        layout: {
+            padding: 100
+    }
+      }
+    });
+  </script>
+</html>
