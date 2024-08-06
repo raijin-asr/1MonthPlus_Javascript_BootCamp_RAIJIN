@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exception Handling</title>
+</head>
+<body>
+    <!-- Errors are of two types:
+    -- Compile Time Error(Syntax Error): It is an error that occurs during the compilation of a program. It is also called a syntax error. It is an error that occurs during the compilation of a program. It is also called a syntax error.
+    -- Semantic error(Logical Error): It is an error in logic. It is a type of error that occurs when the syntax of the code is correct but the code does not produce the expected result.
+    -- Runtime Error: It is an error that occurs during the execution of a program. It is also called an exception. It is an error that occurs during the execution of a program. It is also called an exception.
+    -- Linker Error: It is an error that occurs when the linker is unable to link the object files of a program. It is an error that occurs when the linker is unable to link the object files of a program.
+
+    Exception Handling is a mechanism to handle runtime errors. It is a way to handle exceptions in a program so that normal flow of the program can be maintained.
+    Syntax:
+    try{
+        // code that may throw exception
+    }catch(Exception e){
+        // code to handle exception 
+    }-->
+
+    <script>
+        //example 1: divide by zero error
+        try{
+            // code that may throw exception
+            var x = 10;
+            var y = 0;
+            var z = x/y;
+            document.write(z); // Infinity: 
+        }catch(e){
+            // code to handle exception 
+            document.write("Error: "+e); // Error: ReferenceError: y is not defined
+        }
+
+        //example 2: type error
+        try{
+            // code that may throw exception
+            var x = 10;
+            var y = "hello";
+            var z = x/y;
+            document.write(z); // NaN:
+        }catch(e){
+            // code to handle exception 
+            document.write("Error: "+e); // Error: ReferenceError: y is not defined
+        }
+
+        //example 3: try-catch-finally block
+        try{
+            // code that may throw exception
+            var x = 10;
+            var y = 0;
+            var z = x/y;
+            document.write(z); // Infinity:
+        }catch(e){
+            // code to handle exception 
+            document.write("Error: "+e); // Error: ReferenceError: y is not defined
+        }finally{
+            // code that will always execute
+            document.write("<br>Finally block is always executed");
+        }
+
+        //example 4: throw keyword: custom exception
+        try{
+            // code that may throw exception
+            var x = 10;
+            var y = 0;
+            if(y==0){
+                throw "Division by zero error";
+            }
+            var z = x/y;
+            document.write(z); // Infinity:
+        }catch(e){
+            // code to handle exception 
+            document.write("Error: "+e); // Error: Division by zero error
+        }
+        
+        //other example: e.message, e.name, e.stack
+        try{
+            console.log(add())
+        }catch(e){
+            console.log("Error: "+e.message); // Error: add is not defined
+            console.log("Error: "+e.name); // Error: ReferenceError
+            console.log("Error: "+e.stack); // Error: ReferenceError: add is not defined:gives line number
+        }
+
+        // example: function add
+        function add(x,y){
+            if(isNaN(x) || isNaN(y)){
+                throw "Invalid input. Please enter a number only";
+            }
+            return x+y;
+        }
+        try{
+            console.log(add(10,20)); //no exception
+            console.log(add("hello",20)); //exception as hello is not a number
+        }catch(e){
+            console.log("Error: "+e);
+        }
+
+        //JS Built-in Error Types
+        //1. EvalError: An error has occurred in the eval() function
+        //2. RangeError: A number "out of range" has occurred
+        //3. ReferenceError: An illegal reference has occurred
+        //4. SyntaxError: A syntax error has occurred
+        //5. TypeError: A type error has occurred
+        //6. URIError: An error in encodeURI() has occurred
+
+        //eval error: removed from ES5
+        try{
+            eval("alert('Hello)"); //missing single quote
+        }catch(e){
+            console.log("Error: "+e.message); // Error: Unexpected token ')'
+        }
+        
+        //example: RangeError
+        try{
+            var x = new Array(-1);
+        }catch(e){
+            console.log("Error: "+e.message); // Error: Invalid array length
+        }
+
+        //example: ReferenceError
+        try{
+            console.log(x); // x is not defined
+        }catch(e){
+            console.log("Error: "+e.message); // Error: x is not defined
+        }
+
+        //example: SyntaxError
+        try{
+            eval("alert('Hello)"); //missing single quote
+        }catch(e){
+            console.log("Error: "+e.message); // Error: Unexpected token ')'
+        }
+
+        //example: TypeError
+        try{
+            var x = 10;
+            x.toUpperCase(); //toUpperCase is not a function
+        }catch(e){
+            console.log("Error: "+e.message); // Error: x.toUpperCase is not a function
+        }
+
+        //example: URIError
+        try{
+            decodeURI("%%%"); //URIError: URI malformed
+        }catch(e){
+            console.log("Error: "+e.message); // Error: URIError: URI malformed
+        }
+        
+    </script>
+
+</body>
+</html>
