@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular Expression</title>
+</head>
+<body>
+    <!-- --specify format of data to be matched by expression and find or validate or extract data
+    --instead of searching for a specific string in a text manually, we can search for a pattern
+    --Regular expressions are used to perform pattern-matching and "search-and-replace" functions on text.
+    --regex, regexp, object for parsing and tokenization of strings
+    --patterns can be of email, phone number, date, password, address, etc
+    --syntax: /pattern/modifiers or /pattern/flag or new RegExp(pattern, flag)
+    --modifiers: i, g, m, u, y
+    --flags: i, g, m, u, y where i is case-insensitive, g is global match, m is multiline match, u is unicode, y is sticky search
+
+    --methods: search(), replace(), test(), match(), split()
+
+    --search(): searches for a match between a regular expression and a string, and returns the position of the match
+    --replace(): replaces a specified value with another value in a string
+    --test(): tests for a match in a string, returns true or false
+    --match(): searches for a match between a regular expression and a string, and returns an array of the matches
+    --split(): uses a regular expression or a fixed string to break a string into an array of substrings
+
+    --pattern examples: /w3schools/i , or /w3schools/i.test("W3schools.com") or new RegExp("w3schools", "i")
+    gives true if w3schools is found in W3schools.com and i is case-insensitive
+
+
+    //practice:  -->
+    <input type="text" id="input">
+    <div id="output"></div>
+
+    <script>
+        //examples of regular expressions
+        let str = "Visit W3Schools";
+        let patt = /w3schools/i; //i is case-insensitive
+        let result = patt.test(str); //true
+        console.log(result); //true
+
+        //match examples
+        let str1= "Ameer";
+        let result1= str1.match(/er/); //no bracket in er: searches combined: matches e in Ameer
+        let resultx= str1.match(/er/); //bracket in er: searches separate e and r: matches e in Ameer
+        let result2= str1.match(/e/g); //matches e in Ameer in global
+        console.log(result1); // gives e in array format in index 1
+        console.log(result2); // gives (2) ['e','e']
+
+        //search: searches for a match between a regular expression and a string, and returns the position of the match
+        let str2= "Visit W3Schools";
+        let result3= str2.search(/sc/gi); //searches for w3schools in Visit W3Schools
+        console.log(result3); // gives 6
+
+        //brackets: used to find a range of characters
+        let str3= "1234567890";
+        let result4= str2.match(/[1-5]/g); //matches 1 to 5
+        console.log(result3); // gives (5) ['1','2','3','4','5']
+
+        let str4= "ameer_Rai123";
+        let result5= str4.match(/[a-zA-Z0-9]/g); //matches a to z,A to Z, 0 to 9
+        console.log(result5); // gives (11) ['a','m','e','e','r','_','R','a','i','1','2','3']
+
+        let result6= str4.match(/[^a-zA-Z]/g); //^ is not: matches except a to z,A to Z
+        console.log(result6); // gives (3) ['_','1','2']
+
+        //use of |: used to find a match for any one of the patterns
+        let str5= "ameer_Rai123";
+        let result7= str5.match(/(a|e)/g); //matches a or e
+        console.log(result7); // gives (3) ['a','e','e']
+
+        //Qualifiers: used to define quantities
+        //examples:  *: zero or more, +: one or more, ?: zero or one, {n}: exactly n, {n,}: n or more, {n,m}: between n and m
+        let str6= "amer ameer_Rai123";
+        let result8= str6.match(/a+/g); //matches one or more a
+        console.log(result8); // gives (3) ['a','a','a']
+
+        let result9= str6.match(/a*/g); //matches zero or more a
+        console.log(result9); // gives (3) ['a','a','a']
+
+        let result10= str6.match(/amee?r/g); //matches zero or one a
+        console.log(result10); // gives (2) ['amer','ameer']
+
+        let result11= str6.match(/a{2}/g); //matches exactly 2 a
+        console.log(result11); // gives (1) ['aa']
+
+        let result12= str6.match(/e{2,}/g); //matches 2 or more a
+        console.log(result12); // gives (1) ['ee']
+
+        let result13= str6.match(/e{1,2}/g); //matches between 1 and 2 a
+        console.log(result13); // gives (2) ['e','ee']
+
+        //$: used to match the end of a string
+        let str8= "ameer_Rai123";
+        let result20= str8.match(/\d$/g); //matches digits at the end
+        console.log(result20); // gives (1) ['3']
+
+        //^: used to match the beginning of a string
+        let str9= "ameer_Rai123";
+        let result21= str9.match(/^a/g); //matches a at the beginning
+        console.log(result21); // gives (1) ['a']
+
+        //meta characters: used to match the beginning or end of a string
+        //use of \: used to escape a special character
+        // \d: matches digits, \D: matches non-digits, \w: matches word characters, \W: matches non-word characters, \s: matches whitespace characters, \S: matches non-whitespace characters
+
+        // .: used to match any character except newline: matches all characters
+        let strr= "ameer_Rai123";
+        let resultt= str8.match(/./g); //matches any character
+        console.log(resultt); // gives (11) ['a','m','e','e','r','_','R','a','i','1','2']
+
+        // \d= [0-9]
+        let str7= "ameer_Rai123";
+        let result14= str7.match(/\d/g); //matches digits
+        console.log(result14); // gives (3) ['1','2','3']
+
+        // \D= [^0-9], \w= [a-zA-Z0-9_], \W= [^a-zA-Z0-9_], \s= [\t\n\v\f\r], \S= [^\t\n\v\f\r]
+        let result15= str7.match(/\D/g); //matches non-digits
+        console.log(result15); // gives (9) ['a','m','e','e','r','_','R','a','i']
+
+        // \w= [a-zA-Z0-9_]
+        let result16= str7.match(/\w/g); //matches word characters
+        console.log(result16); // gives (10) ['a','m','e','e','r','_','R','a','i','1']
+
+        // \W= [^a-zA-Z0-9_]
+        let result17= str7.match(/\W/g); //matches non-word characters
+        console.log(result17); // gives (1) ['3']
+
+        // \s= [\t\n\v\f\r]
+        let result18= str7.match(/\s/g); //matches whitespace characters
+        console.log(result18); // gives (1) ['_']
+
+        // \S= [^\t\n\v\f\r]
+        let result19= str7.match(/\S/g); //matches non-whitespace characters
+        console.log(result19); // gives (10) ['a','m','e','e','r','R','a','i','1','2']
+
+        //use of .: used to match any character except newline
+        let str10= "ameer_Rai123";
+        let result22= str8.match(/./g); //matches any character
+        console.log(result20); // gives (11) ['a','m','e','e','r','_','R','a','i','1','2']
+
+        // pattern= (\e+){1,2}
+        let str11= "amer deer gear ameer_Rai123";
+        let result23= str11.match(/(\e+){1,2}/g); //matches e one or two times
+        console.log(result23); // gives (3) ['e','ee','e']
+
+
+        //matching urls examples from input
+        let input= document.getElementById("input");
+        let output= document.getElementById("output");
+        input.addEventListener("input", function(){
+            let value= input.value;
+            let result_url= value.match(/^((http|https):\/w{3}\.[a-zA-Z0-9-\.]+\.[a-z]{2,4})$/g);
+            if(result_url){
+                output.innerHTML= "URL is valid";
+            }
+            else{
+                output.innerHTML= "URL not valid";
+            }
+            console.log(result_url);
+        });
+
+
+        //regExp object
+        let patt0= new RegExp("w3schools", "i"); //i is case-insensitive
+
+        //its methods: exec(), test(), toString(), compile() is deprecated
+
+        //exec(): searches for a match in a string, returns the first match
+        let str12= "Visit W3Schools";
+        let patt1= /w3schools/i;
+        let result24= patt1.exec(str12);
+        console.log(result24); // gives ['W3Schools', index: 6, input: 'Visit W3Schools', groups: undefined]
+
+        //test(): tests for a match in a string, returns true or false
+        let str13= "Visit W3Schools";
+        let patt2= /w3schools/i;
+        let result25= patt2.test(str13);
+        console.log(result25); // gives true
+
+        //toString(): returns the string value of the regular expression
+        let patt3= /w3schools/i;
+        let result26= patt3.toString();
+        console.log(result26); // gives /w3schools/i
+
+    </script>
+</body>
+</html>
