@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Drop Game</title>
+    <style>
+        #topSection {
+            background-color: green;
+            position: fixed;
+            width: 100%;
+            height: 50px;
+            top: 0;
+            left: 0;
+        }
+
+        #bottomSection {
+            background-color: red;
+            position: fixed;
+            width: 100%;
+            height: 50px;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<section id="topSection">
+    <h3>Score: <span id="scoreSpan"></span></h3>
+</section> 
+
+<section id="bottomSection">
+    <h3>Typed Word: <span id="typedWordSpan"></span></h3>
+</section>    
+</body>
+
+<script>
+    const wordList = ['apple', 'banana', 'cherry', 'date', 'tv', 'laptop', 'mobile', 'mouse', 'keyboard'];
+    const wordListLength = wordList.length;
+
+    let scoreSpan = document.getElementById('scoreSpan');
+    let typedWordSpan = document.getElementById('typedWordSpan');
+
+    setInterval(showWord, 3000); //calls the showWord function every 3000ms
+
+    function showWord() {
+        index = Math.floor(Math.random() * wordListLength); //gives a random number between 0 and wordListLength
+        document.body.append(createSpan(wordList[index])); //print the word from wordList to span tag
+    }
+
+     //create span tag with typedWord data
+     function createSpan(word) {
+        let span = document.createElement('span');
+        span.innerHTML = word;
+        span.id = word; //set the id of the span tag to the word
+        
+        let randomPosition= Math.random() * window.innerWidth; //gives a random number between 0 and window.innerWidth
+        span.style.position = "absolute";
+        span.style.right= randomPosition + 'px'; //set the right position of the span tag to randomSpan
+
+        //different modes of speed: beginner, intermediate, advanced
+        let intervalId=setInterval(dropSpan, 40); //calls the dropSpan function every 40ms
+        span.intvid = intervalId; //set the id of the span tag to intervalId
+
+            //another function to drop the span
+            let top=60;
+            function dropSpan(){
+                top += 1; //increment the top position by 1
+                span.style.top = top + 'px'; //set the top position of the span tag to top
+                if(top > window.innerHeight - 65){ //if the top position is greater than the window height
+                    span.remove(); //remove the span tag
+                    clearInterval(intervalId); //clear the interval
+                    alert("Game Over! Your Score is: " + score); //show an alert with the score
+                    //local stroage for high score
+                    window.location.reload(); //reload the page
+                }
+            }
+   
+        return span;
+    }
+
+    let typedWord = ""; //initialize typedWord as an empty string
+    let score= 0;
+
+    //or make array of invalid Key such as Control, Alt, Escape
+
+    //when a key is pressed
+    document.onkeyup = function(event) { //when a key is pressed
+        if(event.key=="Escape" || "Control" || "Alt"){return;} //if the key pressed is escape, then return
+        if(event.key==" " || event.key=="Enter"){ //if the key pressed is space or enter
+            let data=document.getElementById(typedWord);
+            
+            if(data){ //if the span tag with the id of typedWord exists, then only remove
+                clearInterval(data.intvid); //clear the interval
+                data.remove(); //remove the span tag with the id of typedWord
+                typedWord = ''; //reset typedWord to an empty string
+                typedWordSpan.innerHTML = typedWord; //print the typedWord to the span tag
+                score++; //increment score by 1
+                scoreSpan.innerHTML = score; //print the score to the span tag 
+            }  
+        }else if(event.key==='Backspace'){ //if the key pressed is backspace
+            typedWord = typedWord.slice(0, -1); //remove the last character from typedWord //or also can use substring(0,-1)
+            typedWordSpan.innerHTML = typedWord; //print the typedWord to the span tag
+
+        }else{
+            typedWord += event.key; //set typedWord to the key that was pressed
+            typedWordSpan.innerHTML = typedWord; //print the typedWord to the span tag
+        }
+      console.log("Word Typed:", typedWord);  
+      console.log("Score:", score);  
+    };
+
+</script>
+</html>
