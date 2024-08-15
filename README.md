@@ -29,3 +29,8 @@
     Day28: Exception Handling
     Day29: Regular Expression
     Day30: Word Drop Game
+
+--------------------------------------------------------Xtra(Advanced + Projects)
+
+    Xtra1: Magic Note Taker App
+ 
