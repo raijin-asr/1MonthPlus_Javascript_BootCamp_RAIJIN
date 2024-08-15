@@ -34,4 +34,7 @@
 <hr>
 <br>Source:</b><br>
 Youtube Name: Everyday Karma( From day 1 to 30) <br>
-Link: https://www.youtube.com/watch?v=W3N6_sT8bqM&list=PL4njvVBDLL23ldnM1oA0MJmRtbJJdkkah&index=46&t=2894s
+JS Playlist Link: https://www.youtube.com/watch?v=W3N6_sT8bqM&list=PL4njvVBDLL23ldnM1oA0MJmRtbJJdkkah&index=46&t=2894s
+
+Youtube Name: CodeWithHarry
+JS playlist Link: https://www.youtube.com/watch?v=cvvwkgp4HBg&list=PLu0W_9lII9ajyk081To1Cbt2eI5913SsL&index=1
