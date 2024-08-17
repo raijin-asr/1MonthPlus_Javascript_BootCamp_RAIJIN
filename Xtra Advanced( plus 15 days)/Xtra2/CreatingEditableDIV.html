@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Div</title>
+</head>
+<body>
+    <div class="container">
+        <div class="child" id="child">Child 1</div>
+    </div>
+    <script>
+        let child = document.getElementById('child');
+        let container = document.querySelector('.container');
+        
+        let newDiv = document.createElement('div'); //create new div
+        newDiv.setAttribute('id', 'div1');
+        newDiv.setAttribute('class', 'div1');
+        newDiv.setAttribute('style', 'border: 1px solid black; width: 200px; padding: 10px; margin: 10px;'); //set style
+
+        //add new text to new div
+        let newData= localStorage.getItem('data');
+        let data;
+        if(newData==null){
+            data= document.createTextNode('Click to Edit your Data');
+        }else{
+            data= document.createTextNode(newData);
+        }
+
+        newDiv.appendChild(data); //append text node to new div
+        
+        
+        container.insertBefore(newDiv, child); //insert new div before child
+
+        //add event listener to new div
+        newDiv.addEventListener('click', function(){
+            let numberOfTextarea= document.getElementsByClassName('textarea').length;
+            if(numberOfTextarea == 0){
+                let html = newDiv.innerHTML;
+                newDiv.innerHTML = `<textarea class="textarea form-control" id="textarea1" rows="3">${html}</textarea>`; //replace div with textarea
+            }
+
+            //blur event listener
+            let textarea = document.getElementById('textarea1');
+            textarea.addEventListener('blur', function(){
+                newDiv.innerHTML = textarea.value; //replace textarea with div
+                localStorage.setItem('data', textarea.value);
+            });
+        });
+
+    </script>
+</body>
+</html>

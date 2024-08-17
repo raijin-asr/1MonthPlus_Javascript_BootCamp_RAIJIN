@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Prototype</title>
+</head>
+<body>
+    <script>
+        //Object Prototype: prototype means where you started,or initial point
+//--it is a template for creating objects in javascript
+//--it is a parent of all objects in javascript
+//--it is a built-in, global object 
+
+//Object.prototype
+//Object.prototype is a property of the Object constructor.
+//It is a global object and is available in all scopes.
+
+//code:
+let obj = {
+    name: "Ameer",
+    address:"ktm"
+};
+
+console.log(obj.__proto__); //Object.prototype
+console.log(obj.__proto__ === Object.prototype); //true
+console.log(Object.prototype.__proto__); //null
+//in console, we can see that obj is created from Object.prototype
+
+//Object.prototype.constructor
+//Returns a reference to the Object function that created the instance's prototype.
+//Note that the value of this property is a reference to the function itself, not a string containing the function's name.
+//The value is only read-only for primitive values such as 1, true and "test".
+
+//code:
+function Object1(name, address){
+    this.name = name;
+    this.address = address;
+}
+
+let obj2 = new Object1("Ameer", "ktm");
+console.log(obj2.constructor); //Object(name, address)
+console.log(Object1.prototype.constructor); //Object()
+
+//own prototype: always define own custom prototype
+Object1.prototype.getName = function(){ //shown inside __proto__
+    return this.name;
+}
+
+let obj3 = new Object1("Ram", "pkh");
+console.log(obj3.getName()); //Ram
+
+//Object.prototype.hasOwnProperty()
+//The hasOwnProperty() method returns a boolean indicating whether the object has the specified property as its own property (as opposed to inheriting it).
+
+//code:
+let obj4 = {
+    name: "Ameer",
+    address: "ktm"
+};
+
+console.log(obj4.hasOwnProperty('name')); //true
+console.log(obj4.hasOwnProperty('getName')); //false
+
+//Object.prototype.isPrototypeOf()
+//The isPrototypeOf() method checks if an object exists in another object's prototype chain.
+
+//code:
+function Object2(name, address){
+    this.name = name;
+    this.address = address;
+}
+
+let obj5 = new Object2("Ameer", "ktm");
+console.log(Object2.prototype.isPrototypeOf(obj5)); //true
+
+
+//and many other methods such as toString(), valueOf(), etc.
+
+    </script>
+</body>
+</html>
