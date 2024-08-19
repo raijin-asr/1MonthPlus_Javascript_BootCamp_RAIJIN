@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype Inheritance</title>
+</head>
+<body>
+    <h1>Check console for JS works</h1>
+
+<script>
+//Prototype Inheritance: prototype inheritance is a feature of javascript where an object inherits properties and methods from another object
+//it is a way to create a new object based on an existing object
+//it is a way to reuse code
+//it is a way to create a parent-child relationship between objects
+//it is a way to create a chain, hierarchy of objects
+
+//creating proto object
+const proto= {
+    slogan: function(){
+        return "This is the best company";
+    },
+    changeName: function(newName){
+        this.name = newName;
+    }
+}
+
+//creating object
+const obj1 = Object.create(proto);  //create object obj1 from proto object
+obj1.name = "Ameer";
+obj1.role = "Programmer";
+console.log(obj1);
+console.log(obj1.slogan()); //This is the best company
+obj1.changeName("Ameer Khan"); //change name
+console.log(obj1); //name changed
+
+//another way to creating same object
+const obj2 = Object.create(proto, {
+    name: {value: "Ameer2", writable: true},
+    role: {value: "Programmer2"}
+});
+console.log(obj2);
+obj2.changeName("Ameer Khan"); //change name: becuase writable is true 
+
+
+//Inheriting prototype from one object to another object
+function Employee(name, salary){  //create Employee object
+    this.name = name;
+    this.salary = salary;
+}
+
+//inherit prototype from proto object to Employee object 
+Employee.prototype.slogan = function(){ //inherit slogan from proto object
+    return `This company is the best. Regards, ${this.name}`;
+}
+
+let emp1 = new Employee("Ameer3", 100000);
+console.log(emp1.slogan()); //This company is the best. Regards, Ameer
+console.log(emp1); //Employee {name: "Ameer3", salary: 100000}
+
+//Developer
+function Developer(name, salary, language){ //create Developer object
+    Employee.call(this, name, salary); //inherit Employee object, call() method is used to call a function with a given this value and arguments provided individually
+    this.language = language; //set extra property language to Developer object 
+}
+
+Developer.prototype = Object.create(Employee.prototype); //inherit Employee prototype to Developer object
+
+let ram=  new Developer("Ram", 200000, "Javascript");
+console.log(ram); //Developer {name: "Ram", salary: 200000, language: "Javascript"}
+console.log(ram.slogan()); //This company is the best. Regards, Ram
+
+
+//manually set constructor
+Developer.prototype.constructor = Developer; //set constructor to Developer object to show constructor name in console
+console.log(ram); //Developer {name: "Ram", salary: 200000, language: "Javascript"}
+
+
+</script>
+</body>
+</html>

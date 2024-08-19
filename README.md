@@ -34,6 +34,7 @@
 
     Xtra1: Magic Note Taker App
     Xtra2: Creating Editable Div, Object Prototype
+    Xtra3: Class and Inheritance, Inheriting Prototype
  
 <hr>
 <br>Source:</b><br>
@@ -45,5 +46,5 @@ Youtube Name: CodeWithHarry<br>
 JS playlist Link: https://www.youtube.com/watch?v=cvvwkgp4HBg&list=PLu0W_9lII9ajyk081To1Cbt2eI5913SsL&index=1
 
 <br>
-Website: Programiz Pro
+Website: Programiz Pro<br>
 Link: https://app.programiz.pro/course/learn-javascript-intermediate
