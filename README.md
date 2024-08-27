@@ -35,6 +35,7 @@
     Xtra1: Magic Note Taker App
     Xtra2: Creating Editable Div, Object Prototype
     Xtra3: Class and Inheritance, Inheriting Prototype
+    Xtra4: Async, Await plus Fetch and Promises
  
 <hr>
 <br>Source:</b><br>

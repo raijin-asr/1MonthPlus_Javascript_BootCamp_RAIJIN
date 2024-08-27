@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch APi and Promises</title>
+</head>
+<body>
+    
+<p>
+    fetch() is a built-in JavaScript function used to make requests to servers. It allows you to retrieve data from a server and handle the response.
+</p>
+<script>
+// specify the endpoint 
+const endpointURL = 'https://api.programiz.pro/api/Demo/javascript/movies';
+
+// make a GET request using fetch
+let fetchData = fetch(endpointURL);
+ 
+//Promise in Fetch using then() method
+const endpointURL1 = 'https://api.programiz.pro/api/Demo/javascript/movies';
+let fetchData1= fetch(endpointURL);
+fetchData
+    .then(response =>{
+        console.log(response); //give response object only
+    })
+
+//getting data from response object
+const endpointURL3 = 'https://api.programiz.pro/api/Demo/javascript/movies';
+let fetchData3 = fetch(endpointURL);
+fetchData
+    .then(response => response.json())
+    .then(data => console.log(data)); //give data in json format
+
+console.log(fetchData);
+
+//getting only name of movies
+let fetchData4 = fetch(endpointURL);
+fetchData
+  .then(response => response.json())
+  .then(data => {
+    if (data && data.movies) {
+      data.movies.forEach(movie => console.log(movie.name));
+    } else {
+      console.error('Error: Invalid data format or empty movies array');
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+
+
+  //Promise:
+//   The fetch() function returns a special object called a Promise. A Promise is a way to handle asynchronous operations in JavaScript.
+//Promises help us manage asynchronous operations more efficiently.
+// By using Promises, you can avoid callback hell and make your code easier to follow.
+
+//examples showing lack of promise:
+function getUsers() {
+  return [
+    { username: 'sita', email: 'sita@test.com' },
+    { username: 'ram', email: 'ram@test.com' },
+  ];
+}
+function findUser(username) {
+  const users = getUsers();
+  const user = users.find((user) => user.username === username);
+  return user;
+}
+
+console.log(findUser('ram')); // it inroduces delay while accessing data
+
+//so timeout() is used to stimular such delay
+function getUsers() {
+  let users = [];
+ 
+  setTimeout(() => {
+    users = [
+      { username: 'john', email: 'john@test.com' },
+      { username: 'jane', email: 'jane@test.com' },
+    ];
+  }, 1000);
+ 
+  return users;
+} //it will return empty array as it will not wait for setTimeout() to complete
+ 
+//So, To handle this, we can use Promises.
+//A Promise in JavaScript is just like a promise in real life.
+
+// A Promise in JavaScript is an object representing the eventual completion (or failure) of an asynchronous operation. It allows you to write asynchronous code more efficiently.
+
+// These kinds of operations have three states:
+
+// Pending: The initial state, neither fulfilled nor rejected.
+// Fulfilled: The operation completed successfully.
+// Rejected: The operation failed.
+
+// example: So, here are the three cases in ordering pizza:
+// 1. Pending: Right after the promise is made and you are waiting for the pizza.
+// 2. Fulfilled: When you get the pizza.
+// 3. Rejected: In case there is no dough left and you don't get the pizza.
+
+// To create a Promise, we use the new Promise() built-in object. You pass in a function with two parameters: resolve and reject.
+let promise = new Promise(function(resolve, reject) {
+     // Write your code here  
+    //resolve(value) — If the job is finished successfully, with result value.
+    // reject(error) — If an error occurred, with error error.
+});
+
+//example:
+let myPromise = new Promise(function(resolve, reject) {
+    // change this to false to see the rejection    
+    let isPizzaAvailable = true;
+    if (isPizzaAvailable) {
+        // resolves the promise
+        resolve("Pizza is ready!");
+    } else {
+        // rejects the promise
+        reject("No pizza dough left!");
+    }
+});
+
+//with timeout()
+let fetchSimulation = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        // simulate a successful operation
+        const success = true;
+        if (success) {
+            resolve('Some data');
+        } else {
+            reject('Error fetching data');
+        }
+    }, 500); // Delay of 0.5 seconds
+});
+
+
+//To get the value of a Promise when it's fulfilled, call the .then() method of the Promise object.
+// A neat feature of .then() is it returns value as a Promise.
+// This means we can chain multiple promises using the .then() method.
+// We can then handle the result of a Promise and can perform a series of asynchronous operations. This chain is called promises chaining.
+
+//Chaining Promises---------------------------
+//You can use .then() syntax after the promise to define the next action after the promise resolves.
+
+const fetchData6 = fetch('https://api.programiz.pro/api/Demo/javascript/movies');
+ 
+fetchData6
+    .then((response)=> response.text())
+    .then((data) => console.log(data));
+
+//problem solution: function to create a promise that resolves with a message after 2 seconds
+// Write your code here
+// function to create a promise that resolves with a message after 2 seconds
+function successMessage(msg){
+ let myPromise= new Promise((resolve, reject) => {
+    setTimeout(()=> {
+        var success= true;
+        if(success){
+            resolve(msg);
+        }else{
+            reject("Error");
+        }
+    }, 2000);
+ }
+
+ )
+ return myPromise;
+}
+
+// get user input
+let message= prompt()
+
+// call the function and handle the resolved value
+successMessage(message)
+.then((data)=> console.log(data))
+
+//PROBLEM2: function that returns a promise resolved with the input number and add 5
+// function that returns a promise resolved with the input number
+function x(ip){
+    return new Promise((resolve)=>{
+        let isNum= true;
+        if(isNum){resolve(ip)}
+    }
+    )
+}
+
+// get user input
+let input= parseInt(prompt())
+
+// call the function, chain .then() methods, and print the result
+x(input).then((result)=> console.log(result + 5));
+
+//catch() in Promise-----------------------
+// Getting data from the internet means that you will come across errors many times. In these kinds of cases, the promise is rejected.
+// If you want to get the error only when the state of the Promise is rejected, use the catch() method of the Promise object:
+
+const fetchData7 = fetch('https://api.programiz.pro/health');
+
+fetchData7
+    .then((response) => response.text())
+    .then((data) => console.log(data))
+    .catch((error) => console.log("Response not found"));
+
+//PROBLEM3: catch error in the promise
+// Write your code here
+function x(){
+    return new Promise((reject)=>{
+        reject("Something went wrong")
+    }
+
+    )
+}
+x()
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
+
+//finally() in Promise-----------------------
+// Like error handling, you can chain .finally() to the promise. The .finally() method runs code after the Promise settles, whether it resolves or rejects.
+const fetchData8 = fetch('https://api.programiz.pro/api/Demo/javascript/movies');
+ 
+fetchData8
+    .then((response) => response.text())
+    .then((data) => console.log(data))
+    .catch((error) => console.log("Response not found", error))
+    // always runs
+    .finally(() => {
+        console.log('Operation complete.');
+    });
+
+
+
+</script>
+</body>
+</html>
