@@ -38,14 +38,13 @@
     Xtra4: Async, Await plus Fetch and Promises
  
 <hr>
-<br>Source:</b><br>
-Youtube Name: Everyday Karma( From day 1 to 30) <br>
-JS Playlist Link: https://www.youtube.com/watch?v=W3N6_sT8bqM&list=PL4njvVBDLL23ldnM1oA0MJmRtbJJdkkah&index=46&t=2894s
+</br><h3>Source:</h3>
+<p><b>Youtube Name:</b> Everyday Karma( From day 1 to 30)</p> 
+<p><b>JS Playlist Link:</b> https://www.youtube.com/watch?v=W3N6_sT8bqM&list=PL4njvVBDLL23ldnM1oA0MJmRtbJJdkkah&index=46&t=2894s</p>
 
-<br>
-Youtube Name: CodeWithHarry<br>
-JS playlist Link: https://www.youtube.com/watch?v=cvvwkgp4HBg&list=PLu0W_9lII9ajyk081To1Cbt2eI5913SsL&index=1
+<p><b>Youtube Name:</b> CodeWithHarry</p>
+<p><b>JS playlist Link:</b> https://www.youtube.com/watch?v=cvvwkgp4HBg&list=PLu0W_9lII9ajyk081To1Cbt2eI5913SsL&index=1</p>
 
-<br>
-Website: Programiz Pro<br>
-Link: https://app.programiz.pro/course/learn-javascript-intermediate
+<p><b>Website:</b> Programiz Pro</p>
+<p><b>Link:</b> https://app.programiz.pro/course/learn-javascript-intermediate</p>
+
