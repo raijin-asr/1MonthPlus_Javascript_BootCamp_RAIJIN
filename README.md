@@ -36,6 +36,7 @@
     Xtra2: Creating Editable Div, Object Prototype
     Xtra3: Class and Inheritance, Inheriting Prototype
     Xtra4: Async, Await plus Fetch and Promises
+    Xtra5: JSON, Variable Scope, Hoisting
  
 <hr>
 </br><h3>Source:</h3>

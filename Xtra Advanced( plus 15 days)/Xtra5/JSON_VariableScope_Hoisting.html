@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON, Variable Scope and JS Hoisting</title>
+</head>
+<body>
+<script>
+    //JSON:
+// JSON stands for JavaScript Object Notation. It is a lightweight data format used to store and transfer data usually between web servers and web pages.
+
+// Lets see an example of JSON data.
+let person1 = {
+    "name": "sita",
+    "age": 42,
+    "gender": "female"
+}
+
+// Although the JSON syntax resembles JavaScript object literal syntax, they are not the same.
+
+// Access JSON data:
+// You can access JSON data using the dot notation. To access JSON data using dot notation, the syntax is:
+// variableName.key
+
+// Let's access JSON data from the JSON we created. For example,
+// JSON object
+let person2 = {
+    "name": "Ram",
+    "age": 30,
+    "gender": "male"
+};
+ 
+// accessing and printing values using dot notation
+console.log(person.name);
+console.log(person.age); 
+console.log(person.gender); 
+
+// accessing and printing values using square bracket notation
+console.log(person["name"]);
+console.log(person["age"]);
+console.log(person["gender"]);
+
+// Array as Value in JSON:
+// We can use arrays as values in JSON. Let's see an example:
+let data = {
+    "names": ["John", "Anna", "Peter"]
+};
+ 
+// access the first element
+console.log(data.names[0]); // Output: John
+ 
+// access the second element
+console.log(data.names[1]); // Output: Anna
+ 
+// access the third element
+console.log(data.names[2]); // Output: Peter
+ 
+// access names array
+console.log(data.names); // Output: [ 'John', 'Anna', 'Peter' ]
+
+// Array with Object as Value:
+// We can also have objects inside arrays in JSON. This is useful for organizing and accessing related data efficiently.
+let data2 = [{
+        "name": "John",
+        "age": 22
+    },
+    {
+        "name": "Peter",
+        "age": 20
+    },
+    {
+        "name": "Mark",
+        "age": 23
+    }
+];
+ 
+// access the first person's name and age
+console.log(data[0].name); 
+console.log(data[0].age); 
+ 
+// access the second person's name and age
+console.log(data[1].name); 
+console.log(data[1].age); 
+ 
+// access the third person's name and age
+console.log(data[2].name);
+console.log(data[2].age); 
+
+//Convert JSON to JavaScript Object:
+// json object
+const jsonData = '{ "name": "John", "age": 22 }';
+ 
+// converting to JavaScript object
+const obj = JSON.parse(jsonData);
+ 
+console.log(obj); // { name: 'John', age: 22 }
+ 
+// accessing the data
+console.log(obj.name); // John
+console.log(obj.age); // 22
+
+//PROBLEM1: to show  converted JSON object
+// Write your code below
+// json object
+const books = '{ "title": "The Catcher in the Rye", "author": "J.D. Salinger", "year": 1951 }';
+ 
+function convertToJSObject(jsonObj) {
+    // converting to JavaScript object
+    jsonObj = JSON.parse(books);
+    return jsonObj;
+}
+
+let x={}
+console.log(convertToJSObject(x));
+
+// Convert JavaScript Object to JSON: 
+//using the JavaScript built-in JSON.stringify() function
+// JavaScript object
+const obj2= { name: "John", age: 22 };
+ 
+// converting to JSON
+const jsonData2 = JSON.stringify(obj);
+ 
+// accessing the data
+console.log(jsonData);
+
+//PROBLEM2: 
+// Write your code here
+// JavaScript object
+const obj3= { title: "Inception", director: "Christopher Nolan", releaseYear:2010 };
+ 
+function convertToJSONString(jsObj){
+// converting to JSON
+jsObj = JSON.stringify(obj);
+return jsObj;
+}
+ 
+// printing the data
+let y={}
+console.log(convertToJSONString(y));
+
+//correct solution:
+// JavaScript object representing a movie
+const movie = {
+    title: "Inception",
+    director: "Christopher Nolan",
+    releaseYear: 2010
+};
+
+// function to convert JavaScript object to JSON string
+function convertToJSONString(jsonObject) {
+    const jsonString = JSON.stringify(jsonObject);
+    return jsonString;
+}
+
+// convert the JavaScript object to a JSON string
+const jsonString = convertToJSONString(movie);
+
+// print the JSON string to the console
+console.log(jsonString);
+
+//Variable Scope:------------------------------------
+// Variable Scope refers to the visibility of variables in different parts of the code. In JavaScript, there are three types of variable scope:
+//Variables can be declared in different scopes:
+
+// 1. Global Scope
+// 2. Local (Function) Scope
+// 3. Block-Level Scope
+
+//1. Global Scope:
+// declare global variable
+var name = "John";
+ 
+function getName() {
+ 
+    // access variable from inside the function
+    console.log(`Local: ${name}`);
+}
+ 
+getName();
+ 
+// access variable outside the getName() function
+console.log(`Global: ${name}`);
+
+//2. Local (Function) Scope:
+function getName() {
+    // local variable
+    var name = "John";
+ 
+    console.log(`Local: ${name}`);
+}
+// function call
+getName();
+ 
+// outside the getName() function
+console.log(`Global: ${name}`); //give reference Error: name is not defined
+
+//3. Block-Level Scope:
+// JavaScript ES6 introduced block-level scoping with the let and const keywords.
+// Block-level variables are accessible only within the block {} they are defined in, which can be smaller than a function's scope.
+// Variables declared inside a {} block cannot be accessed from outside the block. For example,
+
+function display_scopes() {
+    // declare variable in local scope
+    let message = "local";
+ 
+    if (true) {
+ 
+        // declare block-level variable
+        let message = "block-level";
+ 
+        console.log(`inner scope: ${message}`); // gives inner: block-level
+    }
+ 
+    console.log(`outer scope: ${message}`);    //gives outer: local
+
+}
+ 
+display_scopes(); 
+// Block-Level: The variable inside the if block (visible only there).
+// Local-Level: The variable inside the display_scopes() function.
+
+
+//HOISTING:------------------
+// Just like let and const, var is also a keyword used to declare a variable in JavaScript.
+
+// For example,
+// variable definition
+ var age = 18;
+ 
+// variable usage
+console.log(age);  //  Output: 18
+
+// A variable defined using let and const can be used only after we have defined it first.
+// This is not the same case for var.
+
+// Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their containing scope before code execution.
+
+function printAge(){
+    
+    // initialization of age variable 
+    age = 18; 
+    
+    console.log(age);
+ 
+    var age;  //hositing moves this line to the top of the function
+}
+ 
+printAge(); // Output: 18
+
+// age is assigned a value first, and then declared as a variable. This is possible in JavaScript because of a feature called hoisting.
+// Due to this feature, although variable declarations are done later than their usage, when running the code, this part is moved to the top of its scope.
+
+// here's how JavaScript interprets the code due to hoisting:
+function printAge(){
+    // declaration is hoisted to the top of the scope
+    var age;
+    
+    // initialization happens at the original line
+    age = 18;
+    
+    console.log(age); // Output: 18
+}
+ 
+//Types of Hoisting:
+// two types of hoistings in JavaScript:
+// Variable Hoisting
+// Function Hoisting
+
+//1.Variable hoisting
+// When we declare a variable using var, it is hoisted to the top of its current scope.
+// For example,
+function printMessage(){
+    message = "Hello";
+    
+    // use the message variable before declaration
+    console.log(message); // Output: Hello
+    
+    // variable declaration using var keyword
+    var message;
+ 
+}
+ 
+printMessage();
+printAge();
+
+// above program is equivalent to:
+function printMessage(){
+    
+    var message;
+    message = "Hello";
+    console.log(message);
+ 
+}
+ 
+printMessage();
+
+//Hoisting With let and const:
+// the variable declared with let or const does not have a default value when it is hoisted (unlike when declared using var). So, we cannot access them until they are initialized.
+// Let's take a look at the example below.
+// use the message variable before declaration
+console.log(message);
+ 
+// variable declaration using let keyword
+let message;
+
+//2. Function hoisting:
+// In JavaScript, function hoisting allows us to call the function before its declaration.
+// function call
+greeting(); 
+ 
+// function declaration
+function greeting() {
+  console.log("Welcome to Programiz.");
+}
+
+// Arrow Functions are not hoisted
+// When we use an arrow function, we cannot call it before its declaration. For example,
+// call greet() function before declaration
+greet();
+ 
+// function expression
+var greet = () => {
+    console.log("Programiz");
+}
+// Output:
+// TypeError: greet is not a function
+
+//Initializations Are Not Hoisted:
+// JavaScript moves the declaration of variables to the top of its scope before the code runs.
+// However, the initialization part stays in the original place in the code. For example,
+// display number
+console.log(number);
+var number = 5; // Output: undefined
+
+
+</script>
+</body>
+</html>
