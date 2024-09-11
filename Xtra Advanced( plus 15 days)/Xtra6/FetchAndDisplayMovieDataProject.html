@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch and Display Movie data</title>
+</head>
+<body>
+<script>
+//Working of the Project:
+// The goal of this project is to request movie data from a web source, handle the response, and display the relevant data using fetch().
+
+// We'll do it in the following steps:
+
+// Make a GET Request to the Web Source
+// Handle Response and Check for Errors
+// Display the JSON Data
+// Get High-rated Movies
+// Extract Movie Names with Ratings Greater than or Equal to 9
+
+// Step 1: Make a GET Request to the Web Source
+// We'll first make a GET request to the movie data web source: "https://api.programiz.pro/api/Demo/javascript/movies".
+
+const URL = "https://api.programiz.pro/api/Demo/javascript/movies";
+const movieData = fetch(URL);
+ 
+console.log(movieData);
+
+
+// This code returns a Promise, which could resolve or be rejected.
+// That's why, we need to add methods to handle its response.
+// Before that, let's put this code inside a function.
+
+function fetchMovieData(url) {
+    return fetch(url);
+}
+ 
+const URL1 = "https://api.programiz.pro/javascript/movies";
+const movieData1 = fetchMovieData(URL);
+ 
+console.log(movieData);
+
+// Step 2: Handle Response and Check for Errors
+// To receive the movie list from the Promise object, we need to handle the response by extracting the JSON from the object.
+// To handle any errors occurred in this fetch() process, we'll also add catch().
+
+function fetchMovieData(url) {
+    return fetch(url)
+        .then(response => {
+            return response.json();
+        })
+        .catch(error => {
+            console.error("There was a problem with the fetch operation:");
+            // return null in case of an error
+            return null;
+        });
+}
+ 
+function main() {
+    const URL = "https://api.programiz.pro/api/Demo/javascript/movies";
+    const movieData = fetchMovieData(URL);
+ 
+    // log the fetched movie data
+    console.log(movieData);
+}
+ 
+main();
+
+// Step 3: Display the JSON Data
+// To display the JSON data, we will:
+
+// Make the main function asynchronous using the async keyword.
+// Ensure movieData waits for the JSON data using the await keyword.
+function fetchMovieData(url) {
+    return fetch(url)
+        .then(response => {
+            return response.json();
+        })
+        .catch(error => {
+            console.error("There was a problem with the fetch operation:");
+            // return null in case of an error
+            return null;
+        });
+}
+ 
+async function main() {
+    const URL = "https://api.programiz.pro/api/Demo/javascript/movies";
+    const movieData = await fetchMovieData(URL);
+ 
+    // log the fetched movie data
+    console.log(movieData);
+}
+ 
+main();
+
+// Step 4: Get High-rated Movies
+// To filter movies based on their rating, we implement the getHighRatedMovies() function.
+
+// function to get high-rated movie names
+function getHighRatedMovies(movies){
+     return movies
+        .filter(movie => movie.rating >= 9)
+}
+
+// Step 5: Extract Movie Names with Ratings Greater than or Equal to 9
+// We then extract the names of the filtered movies using map method. For this, we can slightly change the above function as:
+
+function getHighRatedMovies(movies){
+     return movies
+        .filter(movie => movie.rating >= 9)
+        .map(movie => movie.name);
+}
+
+// .map(movie => movie.name) transforms the filtered array of movie objects into an array of movie names. Each movie object is processed to retrieve its name property.
+
+
+// Putting All Together:
+function fetchMovieData(url) {
+    return fetch(url)
+        .then(response => {
+            return response.json();
+        })
+        .catch(error => {
+            console.error("There was a problem with the fetch operation:");
+            // return null in case of an error
+            return null;
+        });
+}
+ 
+function getHighRatedMovies(movies) {
+    return movies
+        .filter(movie => movie.rating >= 9)
+        .map(movie => movie.name);
+}
+ 
+async function main() {
+    const URL = "https://api.programiz.pro/api/Demo/javascript/movies";
+    const movieData = await fetchMovieData(URL);
+ 
+    // log the fetched movie data
+    console.log(movieData);
+ 
+    console.log("\nMovies Rated 9 or above:")
+    const highRatedMovies = getHighRatedMovies(movieData["movies"]);
+    console.log(highRatedMovies);
+}
+ 
+main();
+
+// Add Error Handling
+// function to fetch movie data from the given url
+function fetchMovieData(url) {
+    return fetch(url)
+        .then(response => {
+            return response.json();
+        })
+        .catch(error => {
+            throw new Error("there was a problem with the fetch operation: " );
+        });
+}
+ 
+// function to get names of high-rated movies (rating >= 9)
+function getHighRatedMovies(movies) {
+    // check if movies is an array
+    if (!Array.isArray(movies)) {
+        throw new Error("invalid data format: movies should be an array.");
+    }
+    return movies
+        .filter(movie => movie.rating >= 9)
+        .map(movie => movie.name);
+}
+ 
+// main function to fetch, display, and get high-rated movie names
+async function main() {
+    const URL = "https://api.programiz.pro/api/Demo/javascript/movies";
+    try {
+        const movieData = await fetchMovieData(URL);
+ 
+        // check if movieData is null
+        if (!movieData) {
+            throw new Error("failed to fetch movie data.");
+        }
+ 
+        // check if movieData.movies is valid
+        if (!Array.isArray(movieData.movies)) {
+            throw new Error("invalid movie data format.");
+        }
+ 
+        console.log(movieData);
+ 
+        console.log("\nmovies rated 9 or above:");
+        const highRatedMovies = getHighRatedMovies(movieData.movies);
+        console.log(highRatedMovies);
+    } catch (error) {
+        // log any errors that occur in the main function
+        console.error("An error occurred");
+    }
+}
+ 
+main();
+
+</script>
+</body>
+</html>

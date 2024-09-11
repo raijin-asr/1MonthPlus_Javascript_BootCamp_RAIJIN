@@ -37,6 +37,7 @@
     Xtra3: Class and Inheritance, Inheriting Prototype
     Xtra4: Async, Await plus Fetch and Promises
     Xtra5: JSON, Variable Scope, Hoisting
+    Xtra6: Project to fetch and display movie data
  
 <hr>
 </br><h3>Source:</h3>
