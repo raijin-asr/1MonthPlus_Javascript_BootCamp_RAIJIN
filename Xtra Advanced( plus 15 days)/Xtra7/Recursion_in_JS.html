@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursion in JS</title>
+</head>
+<body>
+<script>
+//Sum of Natural Numbers
+function sum(n) {
+    if (n === 1) {
+        return 1;
+    } else {
+        return n + sum(n - 1);
+    }
+}
+
+//factorial: 
+function factorial(n) {
+       if (n === 1 || n===0) { //base condition: The base case is the stopping condition for recursion.
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+
+let number = parseInt(prompt());
+console.log(factorial(number));
+
+//Reverse a String:
+function reverseString(str) {
+    if (str === "") { //base condition
+        return "";
+    } else {
+         // Recursive call
+        return reverseString(str.substr(1)) + str.charAt(0);
+       //or
+        // return reverse(text.substring(1)) + text[0];
+    }
+}
+
+//Palindrome:
+// A palindrome is a string that spells the same forward and backward. For example, "pullup", "level", "radar", etc.
+function checkPalindrome(text) {
+
+// If the string is empty or contains a single character,
+// the string is a palindrome
+if (text.length === 0 || text.length === 1) {
+    return true;
+}
+
+// Check if the first and last characters are the same
+if (text[0] === text[text.length - 1]) {
+
+    // Recursive call
+    return checkPalindrome(text.substring(1, text.length - 1));
+}
+else {
+    return false;
+}
+}
+
+let result = checkPalindrome("level");
+console.log(result ? "Palindrome" : "Not Palindrome");
+
+
+//Find the Length of a String:
+function findLength(str) {
+    if (str === "") {
+        return 0;
+    } else {
+        return 1 + findLength(str.substr(1));
+    }
+}
+
+// Decimal to Binary;
+function findBinary(decimal) {
+    if (decimal === 0) {
+        return "";
+    }
+
+    // Recursively divide decimal by 2
+    // and concatenate remainder to the result
+    return findBinary(Math.floor(decimal / 2)) + (decimal % 2).toString();
+}
+
+let binaryRepresentation = findBinary(6);
+console.log(binaryRepresentation);
+
+//Find power of a number:
+function findPower(base, power) {
+   if (power === 0) {
+        return 1;
+    } else {
+        return base * findPower(base, power - 1);
+    }
+}
+
+//Fibonacci Series:
+function fibonacci(n) {
+    if (n <= 1) {
+        return n;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+}
+</script>
+</body>
+</html>
